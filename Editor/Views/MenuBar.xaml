@@ -1,0 +1,26 @@
+﻿<UserControl x:Class="NightfallEditor.Views.MenuBar"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:NightfallEditor.Views"
+             xmlns:shell="clr-namespace:System.Windows.Shell;assembly=PresentationFramework"
+             MinWidth="300">
+
+    <Menu shell:WindowChrome.IsHitTestVisibleInChrome="True">
+
+        <MenuItem Header="File"
+              Style="{StaticResource TopMenuItemStyle}">
+
+            <MenuItem Header="Open..."
+                  Style="{StaticResource SubMenuItemStyle}"/>
+
+            <MenuItem Header="Exit"
+                  Style="{StaticResource SubMenuItemStyle}"/>
+
+        </MenuItem>
+
+        <MenuItem Header="Windows"
+              Style="{StaticResource TopMenuItemStyle}"/>
+
+    </Menu>
+
+</UserControl>

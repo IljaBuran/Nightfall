@@ -1,0 +1,78 @@
+﻿<UserControl x:Class="NightfallEditor.Views.Workspace"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:avalonDock="clr-namespace:AvalonDock;assembly=AvalonDock"
+             xmlns:layout="clr-namespace:AvalonDock.Layout;assembly=AvalonDock"
+             xmlns:views="clr-namespace:NightfallEditor.Views"
+             xmlns:panels="clr-namespace:NightfallEditor.Views.Panels">
+
+    <avalonDock:DockingManager x:Name="DockManager">
+
+        <layout:LayoutRoot>
+
+            <layout:LayoutPanel Orientation="Vertical">
+            
+                <layout:LayoutPanel Orientation="Horizontal" DockHeight="*">
+
+                    <!-- Hierarchy -->
+                    <layout:LayoutAnchorablePane DockWidth="250">
+                        <layout:LayoutAnchorable
+                            Title="Hierarchy"
+                            CanClose="True"
+                            CanHide="True">
+
+                            <panels:Hierarchy/>
+
+                        </layout:LayoutAnchorable>
+                    </layout:LayoutAnchorablePane>
+
+                    <!-- Runtime area -->
+                    <layout:LayoutDocumentPane DockWidth="*">
+                        <layout:LayoutAnchorable
+                            Title="Runtime"
+                            CanClose="True"
+                            CanHide="False"
+                            CanDockAsTabbedDocument="False">
+
+                            <panels:Runtime/>
+
+                        </layout:LayoutAnchorable>
+                    </layout:LayoutDocumentPane>
+
+                    <!-- Inspector -->
+                    <layout:LayoutAnchorablePane DockWidth="250">
+                        <layout:LayoutAnchorable
+                            Title="Inspector"
+                            CanClose="True"
+                            CanHide="False"
+                            CanDockAsTabbedDocument="False">
+
+                            <panels:Inspector/>
+
+                        </layout:LayoutAnchorable>
+                    </layout:LayoutAnchorablePane>
+
+                <!--End of horizontal LayoutPanel-->
+                </layout:LayoutPanel>
+
+                <!-- Output Console -->
+                <layout:LayoutAnchorablePane DockHeight="250">
+                    <layout:LayoutAnchorable
+                            Title="Output"
+                            CanClose="True"
+                            CanHide="False"
+                            CanDockAsTabbedDocument="False">
+
+                        <panels:Output/>
+
+                    </layout:LayoutAnchorable>
+                </layout:LayoutAnchorablePane>
+
+                <!--End of vertical LayoutPanel-->
+            </layout:LayoutPanel>
+
+        </layout:LayoutRoot>
+
+    </avalonDock:DockingManager>
+
+</UserControl>

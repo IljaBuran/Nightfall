@@ -1,0 +1,9 @@
+# Visual Studio specific
+*.vcxproj.user
+*.suo
+*.user
+.vs/
+
+# Nightfall specific
+Build
+Editor/obj

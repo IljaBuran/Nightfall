@@ -1,0 +1,39 @@
+﻿<Window x:Class="NightfallEditor.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:views="clr-namespace:NightfallEditor.Views"
+        xmlns:shell="clr-namespace:System.Windows.Shell;assembly=PresentationFramework"
+        WindowStyle="SingleBorderWindow"
+        ResizeMode="CanResize"
+        SizeChanged="Window_SizeChanged"
+        AllowsTransparency="False"
+        WindowStartupLocation="CenterScreen"
+        Background="#252526"
+        MinWidth="800"
+        MinHeight="800">
+
+    <shell:WindowChrome.WindowChrome>
+        <shell:WindowChrome
+        CaptionHeight="30"
+        ResizeBorderThickness="6"
+        GlassFrameThickness="0"
+        CornerRadius="0"
+        UseAeroCaptionButtons="False"/>
+    </shell:WindowChrome.WindowChrome>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <views:WindowBorder Grid.Row="0"/>
+        <views:MenuBar      Grid.Row="1"/>
+        <views:Toolbar      Grid.Row="2"/>
+        <views:Workspace    Grid.Row="3"/>
+
+    </Grid>
+
+</Window>

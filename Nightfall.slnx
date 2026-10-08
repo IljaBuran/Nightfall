@@ -1,0 +1,14 @@
+<Solution>
+  <Configurations>
+    <Platform Name="x64" />
+  </Configurations>
+  <Folder Name="/Editor/">
+    <Project Path="Editor/NightfallEditor.csproj">
+      <Platform Project="x64" />
+      <Build Solution="Release|*" Project="false" />
+    </Project>
+  </Folder>
+  <Folder Name="/Engine/">
+    <Project Path="Engine/NightfallCore/NightfallCore.vcxproj" Id="070e0a37-5b49-46f5-a801-de796e87a2b3" />
+  </Folder>
+</Solution>
