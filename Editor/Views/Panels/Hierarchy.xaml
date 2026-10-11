@@ -1,12 +1,19 @@
 ﻿<UserControl x:Class="NightfallEditor.Views.Panels.Hierarchy"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:local="clr-namespace:NightfallEditor.Views.Panels"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
-    <Grid Background="#1E1E1E">
-        <TextBlock Text="Hierarchy"
-                   Foreground="White"
-                   HorizontalAlignment="Center"
-                   VerticalAlignment="Center"/>
+    <Grid Margin="10">
+        <TreeView Name="trvMenu" 
+                  Background="Transparent" 
+                  BorderThickness="0"
+                  BorderBrush="Transparent">
+            <TreeView.ItemTemplate>
+                <HierarchicalDataTemplate DataType="{x:Type local:MenuItem}" ItemsSource="{Binding Items}">
+                    <TextBlock Text="{Binding Title}" Foreground="White" />
+                </HierarchicalDataTemplate>
+            </TreeView.ItemTemplate>
+        </TreeView>
     </Grid>
 
 </UserControl>
