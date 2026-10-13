@@ -329,11 +329,13 @@
                                     Command="{Binding BrowseLocationCommand}"/>
                         </Grid>
 
-                        <TextBlock Text="{Binding NewProjectPathPreview}"
+                        <TextBlock Name="PathPreview"
+                                   Text="{Binding NewProjectPathPreview}"
                                    Margin="0,6,0,0" FontSize="11"
                                    Foreground="{StaticResource Brush.Text.Disabled}"
                                    TextTrimming="CharacterEllipsis"
-                                   ToolTip="{Binding NewProjectPathPreview}"/>
+                                   ToolTip="{Binding NewProjectPathPreview}"
+                                   Visibility="{Binding PathPreviewVisibility}"/>
 
                         <!-- Validation message; collapsed when empty -->
                         <TextBlock Text="{Binding NewProjectError}"
@@ -354,7 +356,8 @@
                         </TextBlock>
                     </StackPanel>
 
-                    <Button Grid.Row="4" Content="Create"
+                    <Button Grid.Row="4" 
+                            Content="Create"
                             Margin="0,18,0,0" HorizontalAlignment="Right"
                             IsDefault="True"
                             Style="{StaticResource PrimaryButton}"
