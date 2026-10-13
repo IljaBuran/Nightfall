@@ -18,8 +18,9 @@
                     <layout:LayoutAnchorablePane DockWidth="250">
                         <layout:LayoutAnchorable
                             Title="Hierarchy"
-                            CanClose="True"
-                            CanHide="True">
+                            CanClose="False"
+                            CanHide="True"
+                            CanDockAsTabbedDocument="False">
 
                             <panels:Hierarchy/>
 
@@ -28,23 +29,22 @@
 
                     <!-- Runtime area -->
                     <layout:LayoutDocumentPane DockWidth="*">
-                        <layout:LayoutAnchorable
+                        <layout:LayoutDocument
                             Title="Runtime"
-                            CanClose="True"
-                            CanHide="False"
-                            CanDockAsTabbedDocument="False">
+                            CanClose="False"
+                            CanFloat="False">
 
                             <panels:Runtime/>
 
-                        </layout:LayoutAnchorable>
+                        </layout:LayoutDocument>
                     </layout:LayoutDocumentPane>
 
                     <!-- Inspector -->
                     <layout:LayoutAnchorablePane DockWidth="250">
                         <layout:LayoutAnchorable
                             Title="Inspector"
-                            CanClose="True"
-                            CanHide="False"
+                            CanClose="False"
+                            CanHide="True"
                             CanDockAsTabbedDocument="False">
 
                             <panels:Inspector/>
@@ -59,8 +59,8 @@
                 <layout:LayoutAnchorablePane DockHeight="250">
                     <layout:LayoutAnchorable
                             Title="Output"
-                            CanClose="True"
-                            CanHide="False"
+                            CanClose="False"
+                            CanHide="True"
                             CanDockAsTabbedDocument="False">
 
                         <panels:Output/>

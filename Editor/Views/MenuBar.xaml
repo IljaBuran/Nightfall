@@ -7,19 +7,55 @@
 
     <Menu shell:WindowChrome.IsHitTestVisibleInChrome="True">
 
-        <MenuItem Header="File"
-              Style="{StaticResource TopMenuItemStyle}">
+        <!-- Project -->
+        <MenuItem Header="Project">
 
-            <MenuItem Header="Open..."
-                  Style="{StaticResource SubMenuItemStyle}"/>
+            <MenuItem Header="Save" InputGestureText="Ctrl+S"/>
+            <MenuItem Header="Save As..."/>
 
-            <MenuItem Header="Exit"
-                  Style="{StaticResource SubMenuItemStyle}"/>
+            <MenuItem Header="Exit"/>
 
         </MenuItem>
 
-        <MenuItem Header="Windows"
-              Style="{StaticResource TopMenuItemStyle}"/>
+        <!-- Edit -->
+        <MenuItem Header="Edit">
+
+            <MenuItem Header="Undo" InputGestureText="Ctrl+Z"/>
+            <MenuItem Header="Redo" InputGestureText="Ctrl+LShift+Z"/>
+
+            <Separator/>
+
+            <MenuItem Header="Settings"/>
+
+        </MenuItem>
+
+        <!-- View -->
+        <MenuItem Header="View">
+            
+            <!-- Panels -->
+
+            <MenuItem Header="Inspector"/> 
+            <MenuItem Header="Hierarchy"/> 
+            <MenuItem Header="Output"/> 
+            
+            <Separator></Separator>
+
+            <!--  -->
+            
+            <MenuItem Header="Panels">
+
+                <MenuItem Header="Recent1"/>
+                <MenuItem Header="Recent2"/>
+                <MenuItem Header="Recent3"/>
+
+            </MenuItem>
+
+        </MenuItem>
+
+        <!-- Build -->
+        <MenuItem Header="Build">
+            
+        </MenuItem>
 
     </Menu>
 

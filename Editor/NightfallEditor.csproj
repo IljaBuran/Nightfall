@@ -20,4 +20,8 @@
 	  <PackageReference Include="Dirkster.AvalonDock.Themes.Arc" Version="5.0.0" />
 	</ItemGroup>
 
+	<ItemGroup>
+	  <Folder Include="Services\" />
+	</ItemGroup>
+
 </Project>

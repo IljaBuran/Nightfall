@@ -9,6 +9,18 @@ public partial class WindowBorder : UserControl
     public WindowBorder()
     {
         InitializeComponent();
+
+        Loaded += OnLoaded;
+    }
+
+    private void OnLoaded(object sender, RoutedEventArgs e)
+    {
+        if (Window.GetWindow(this) is not Window window)
+            return;
+
+        MaximizeButton.IsEnabled =
+            window.ResizeMode is ResizeMode.CanResize
+                              or ResizeMode.CanResizeWithGrip;
     }
 
     private void OnCloseClicked(object sender, RoutedEventArgs e)
@@ -25,7 +37,7 @@ public partial class WindowBorder : UserControl
 
     private void OnMaximizeClicked(object sender, RoutedEventArgs e)
     {
-        if (Window.GetWindow(this) is not Window window)
+        if (Window.GetWindow(this) is not Window window || window.ResizeMode == ResizeMode.NoResize)
             return;
 
         if (window.WindowState == WindowState.Maximized)

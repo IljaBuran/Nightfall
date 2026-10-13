@@ -4,7 +4,7 @@
              xmlns:local="clr-namespace:NightfallEditor.Views"
              xmlns:shell="clr-namespace:System.Windows.Shell;assembly=PresentationFramework">
     
-    <Grid Background="#252526">
+    <Grid Background="{StaticResource Brush.Window.Background}">
         <Grid.ColumnDefinitions>
             <ColumnDefinition />
             <ColumnDefinition Width="Auto" />
@@ -12,29 +12,27 @@
             <ColumnDefinition Width="Auto" />
         </Grid.ColumnDefinitions>
 
-        <TextBlock Text="Nightfall"
+        <TextBlock Text="{Binding Title, RelativeSource={RelativeSource AncestorType=Window}}"
                    VerticalAlignment="Center"
                    Margin="8,0,0,0"
-                   Foreground="White"
+                   Foreground="{StaticResource Brush.Text}"
                    FontSize="12" />
 
         <Button Grid.Column="1"
                 Content="&#xE921;"
                 Click="OnMinimizeClicked"
-                Style="{StaticResource WindowBorderButtonStyle}"
-                shell:WindowChrome.IsHitTestVisibleInChrome="True"/>
+                Style="{StaticResource WindowBorderButtonStyle}"/>
 
 
-        <Button Grid.Column="2"
+        <Button Name="MaximizeButton"
+                Grid.Column="2"
                 Content="&#xE922;"
                 Click="OnMaximizeClicked"
-                Style="{StaticResource WindowBorderButtonStyle}"
-                shell:WindowChrome.IsHitTestVisibleInChrome="True"/>
+                Style="{StaticResource WindowBorderButtonStyle}"/>
 
         <Button Grid.Column="3"
                 Content="&#xE8BB;"
                 Click="OnCloseClicked"
-                Style="{StaticResource WindowBorderCloseButtonStyle}"
-                shell:WindowChrome.IsHitTestVisibleInChrome="True"/>
+                Style="{StaticResource WindowBorderCloseButtonStyle}"/>
     </Grid>
 </UserControl>

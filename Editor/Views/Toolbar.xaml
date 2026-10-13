@@ -3,58 +3,33 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:views="clr-namespace:NightfallEditor.Views">
 
-    <UserControl.Resources>
-        <Style x:Key="TaskbarButton" TargetType="Button">
-            <Setter Property="Width" Value="28"/>
-            <Setter Property="Height" Value="28"/>
-            <Setter Property="Margin" Value="2"/>
-            <Setter Property="Background" Value="Transparent"/>
-            <Setter Property="BorderThickness" Value="0"/>
-            <Setter Property="Foreground" Value="White"/>
-            <Setter Property="Cursor" Value="Hand"/>
-        </Style>
-
-        <Geometry x:Key="PlayIcon">
-            M8 5 L19 12 L8 19 Z
-        </Geometry>
-
-        <Geometry x:Key="PauseIcon">
-            M6 5 H10 V19 H6 Z M14 5 H18 V19 H14 Z
-        </Geometry>
-
-        <Geometry x:Key="StopIcon">
-            M6 6 H18 V18 H6 Z
-        </Geometry>
-
-    </UserControl.Resources>
-
-    <StackPanel Orientation="Horizontal" MinWidth="100" HorizontalAlignment="Center">
+<StackPanel Orientation="Horizontal" MinWidth="100" HorizontalAlignment="Center">
 
         <Button 
-            Style="{StaticResource TaskbarButton}"
+            Style="{StaticResource IconButton}"
             ToolTip="Play">
             <Path Data="{StaticResource PlayIcon}"
-                  Fill="White"
+                  Fill="{StaticResource Brush.Text}"
                   Width="12"
                   Height="14"
                   Stretch="Uniform"/>
         </Button>
 
         <Button 
-            Style="{StaticResource TaskbarButton}"
+            Style="{StaticResource IconButton}"
             ToolTip="Pause">
             <Path Data="{StaticResource PauseIcon}"
-                  Fill="White"
+                  Fill="{StaticResource Brush.Text}"
                   Width="12"
                   Height="14"
                   Stretch="Uniform"/>
         </Button>
 
         <Button 
-            Style="{StaticResource TaskbarButton}"
+            Style="{StaticResource IconButton}"
             ToolTip="Stop">
             <Path Data="{StaticResource StopIcon}"
-                  Fill="White"
+                  Fill="{StaticResource Brush.Text}"
                   Width="12"
                   Height="14"
                   Stretch="Uniform"/>

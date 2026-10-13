@@ -1,0 +1,16 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <Geometry x:Key="PlayIcon">
+        M8 5 L19 12 L8 19 Z
+    </Geometry>
+
+    <Geometry x:Key="PauseIcon">
+        M6 5 H10 V19 H6 Z M14 5 H18 V19 H14 Z
+    </Geometry>
+
+    <Geometry x:Key="StopIcon">
+        M6 6 H18 V18 H6 Z
+    </Geometry>
+
+</ResourceDictionary>

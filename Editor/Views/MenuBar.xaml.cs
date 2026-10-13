@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System.Diagnostics.Metrics;
+using System.Windows;
 using System.Windows.Controls;
 
 namespace NightfallEditor.Views
@@ -13,9 +14,21 @@ namespace NightfallEditor.Views
             InitializeComponent();
         }
 
-        private void DoNothing(object sender, RoutedEventArgs e)
+        private uint counter = 0;
+
+        private void Increase(object sender, RoutedEventArgs e)
         {
-            return;
+            counter++;
         }
+
+        private void Decrease(object sender, RoutedEventArgs e)
+        { 
+            if (counter >= 0)
+            {
+                counter--;
+            }
+        }
+
+
     }
 }

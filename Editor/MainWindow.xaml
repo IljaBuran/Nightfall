@@ -8,9 +8,10 @@
         SizeChanged="Window_SizeChanged"
         AllowsTransparency="False"
         WindowStartupLocation="CenterScreen"
-        Background="#252526"
+        Background="{StaticResource Brush.Window.Background}"
         MinWidth="800"
-        MinHeight="800">
+        MinHeight="800"
+        Title="Nightfall">
 
     <shell:WindowChrome.WindowChrome>
         <shell:WindowChrome
