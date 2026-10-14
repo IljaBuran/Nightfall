@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <VCProjectVersion>18.0</VCProjectVersion>
+    <Keyword>Win32Proj</Keyword>
+    <ProjectGuid>{607c5b49-f6a5-4990-8940-eb59572ca084}</ProjectGuid>
+    <RootNamespace>Core</RootNamespace>
+  </PropertyGroup>
+  <!-- Engine/Directory.Build.props is imported automatically by this line -->
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ItemDefinitionGroup>
+    <ClCompile>
+      <AdditionalIncludeDirectories>$(ProjectDir)Shared;$(ProjectDir)Private;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <!-- Everything else (compiler settings, output folders, toolset) comes from Engine/Directory.Build.props.
+       Don't add settings here: anything in this file overrides the shared .props. -->
+  <ItemGroup>
+    <ClInclude Include="Shared\Core\Array.hpp" />
+    <ClInclude Include="Shared\Core\BitSet.hpp" />
+    <ClInclude Include="Shared\Core\Core.hpp" />
+    <ClInclude Include="Private\pch.hpp" />
+    <ClInclude Include="Shared\Core\HashMap.hpp" />
+    <ClInclude Include="Shared\Core\HashSet.hpp" />
+    <ClInclude Include="Shared\Core\Map.hpp" />
+    <ClInclude Include="Shared\Core\Pair.hpp" />
+    <ClInclude Include="Shared\Core\Queue.hpp" />
+    <ClInclude Include="Shared\Core\RingBuffer.hpp" />
+    <ClInclude Include="Shared\Core\Set.hpp" />
+    <ClInclude Include="Shared\Core\SparseSet.hpp" />
+    <ClInclude Include="Shared\Core\Vector.hpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Private\pch.cpp">
+      <PrecompiledHeader>Create</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="Private\Core.cpp" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+</Project>

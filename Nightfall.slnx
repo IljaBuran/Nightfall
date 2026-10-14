@@ -1,6 +1,7 @@
 <Solution>
   <Configurations>
     <Platform Name="x64" />
+    <Platform Name="x86" />
   </Configurations>
   <Folder Name="/Editor/">
     <Project Path="Editor/NightfallEditor.csproj">
@@ -8,8 +9,11 @@
     </Project>
   </Folder>
   <Folder Name="/Engine/">
-    <Project Path="Engine/NightfallCore/NightfallCore.vcxproj" Id="070e0a37-5b49-46f5-a801-de796e87a2b3">
-      <Build Solution="Debug|*" Project="false" />
+    <Project Path="Engine/Core/Core.vcxproj" Id="607c5b49-f6a5-4990-8940-eb59572ca084">
+      <Platform Project="x64" />
+    </Project>
+    <Project Path="Engine/Platform/Platform.vcxproj" Id="971d2a3f-db7b-4a20-8c78-243f436d4106">
+      <Platform Project="x64" />
     </Project>
   </Folder>
 </Solution>
