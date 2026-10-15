@@ -1,6 +1,6 @@
 #pragma once
 
-#if defined(ILL_STL)
+#if defined(NF_USE_STL)
 #include <unordered_set>
 
 template<
@@ -11,4 +11,4 @@ template<
 >
 using HashSet = std::unordered_set<Key, Hash, KeyEqual, Allocator>;
 
-#endif // defined(ILL_STL)
+#endif // defined(NF_USE_STL)

@@ -30,25 +30,37 @@
   <!-- Everything else (compiler settings, output folders, toolset) comes from Engine/Directory.Build.props.
        Don't add settings here: anything in this file overrides the shared .props. -->
   <ItemGroup>
-    <ClInclude Include="Shared\Core\Array.hpp" />
-    <ClInclude Include="Shared\Core\BitSet.hpp" />
+    <ClInclude Include="Shared\Core\Assert.hpp" />
+    <ClInclude Include="Shared\Core\Platform\CompilerDetection.hpp" />
+    <ClInclude Include="Shared\Core\Containers\Array.hpp" />
+    <ClInclude Include="Shared\Core\Containers\BitSet.hpp" />
+    <ClInclude Include="Shared\Core\Constants.hpp" />
     <ClInclude Include="Shared\Core\Core.hpp" />
     <ClInclude Include="Private\pch.hpp" />
-    <ClInclude Include="Shared\Core\HashMap.hpp" />
-    <ClInclude Include="Shared\Core\HashSet.hpp" />
-    <ClInclude Include="Shared\Core\Map.hpp" />
+    <ClInclude Include="Shared\Core\Containers\HashMap.hpp" />
+    <ClInclude Include="Shared\Core\Containers\HashSet.hpp" />
+    <ClInclude Include="Shared\Core\Containers\Map.hpp" />
+    <ClInclude Include="Shared\Core\Helpers.hpp" />
     <ClInclude Include="Shared\Core\Pair.hpp" />
-    <ClInclude Include="Shared\Core\Queue.hpp" />
+    <ClInclude Include="Shared\Core\Containers\Queue.hpp" />
+    <ClInclude Include="Shared\Core\Platform\PlatformDetection.hpp" />
+    <ClInclude Include="Shared\Core\Platform\Windows\WindowsDebug.hpp" />
+    <ClInclude Include="Shared\Core\Platform\Windows\WindowsPlatform.hpp" />
+    <ClInclude Include="Shared\Core\Platform\Windows\WindowsString.hpp" />
     <ClInclude Include="Shared\Core\RingBuffer.hpp" />
-    <ClInclude Include="Shared\Core\Set.hpp" />
+    <ClInclude Include="Shared\Core\Containers\Set.hpp" />
     <ClInclude Include="Shared\Core\SparseSet.hpp" />
-    <ClInclude Include="Shared\Core\Vector.hpp" />
+    <ClInclude Include="Shared\Core\String.hpp" />
+    <ClInclude Include="Shared\Core\Types.hpp" />
+    <ClInclude Include="Shared\Core\Containers\Vector.hpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Private\Debug.cpp" />
     <ClCompile Include="Private\pch.cpp">
       <PrecompiledHeader>Create</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="Private\Core.cpp" />
+    <ClCompile Include="Private\Platform\Windows\WindowsString.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
 </Project>

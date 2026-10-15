@@ -1,6 +1,6 @@
 #pragma once
 
-#if defined(ILL_STL)
+#if defined(NF_USE_STL)
 
 #include <set>
 
@@ -12,4 +12,4 @@ template<
 
 using Set = std::set<Key, Compare, Allocator>;
 
-#endif // defined(ILL_STL)
+#endif // defined(NF_USE_STL)

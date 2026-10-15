@@ -1,6 +1,6 @@
 #pragma once
 
-#if defined(ILL_STL)
+#if defined(NF_USE_STL)
 #include <unordered_map>
 
 template<

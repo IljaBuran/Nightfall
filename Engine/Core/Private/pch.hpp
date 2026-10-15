@@ -7,6 +7,12 @@
 #ifndef PCH_H
 #define PCH_H
 
-// add headers that you want to pre-compile here
+#include "Core/Platform/PlatformDetection.hpp"
+
+#if NF_WINDOWS
+
+    #include "Core/Platform/Windows/WindowsPlatform.hpp"
+
+#endif // NF_WINDOWS
 
 #endif //PCH_H

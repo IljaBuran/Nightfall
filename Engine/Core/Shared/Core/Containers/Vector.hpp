@@ -1,6 +1,6 @@
 #pragma once
 
-#if defined(ILL_STL)
+#if defined(NF_USE_STL)
 #include <vector>
 
 template<
@@ -8,4 +8,4 @@ template<
     class Allocator = std::allocator<T>
 >
 using Vector = std::vector<T, Allocator>;
-#endif // defined(ILL_STL)
+#endif // defined(NF_USE_STL)

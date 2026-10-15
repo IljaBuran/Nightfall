@@ -15,7 +15,7 @@
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
 
     <OutDir>$(NightfallRoot)Build\Engine\$(Platform)\$(Configuration)\</OutDir>
-    <IntDir>$(NightfallRoot)Build\Engine\$(Platform)\$(Configuration)\Intermediate\$(ProjectName)\</IntDir>
+    <IntDir>$(NightfallRoot)Build\Engine\$(Platform)\$(Configuration)\Intermediate\$(MSBuildProjectName)\</IntDir>
   </PropertyGroup>
 
   <ItemDefinitionGroup>
@@ -30,12 +30,15 @@
       <TreatAngleIncludeAsExternal>true</TreatAngleIncludeAsExternal>
       <ExternalWarningLevel>TurnOffAllWarnings</ExternalWarningLevel>
 
-      <!-- Every module has its own pch.h + pch.cpp (pch.cpp: PrecompiledHeader = Create) -->
+      <!-- Every module has its own pch.hpp + pch.cpp -->
       <PrecompiledHeader>Use</PrecompiledHeader>
-      <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderFile>pch.hpp</PrecompiledHeaderFile>
+
+      <!-- Force UTF8 -->
+      <AdditionalOptions>/utf-8 %(AdditionalOptions)</AdditionalOptions>
 
       <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>NF_USE_STL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
 
     <!-- Only used by the executable project (App); ignored by static libraries -->
@@ -46,7 +49,6 @@
       <EnableSegmentHeap>true</EnableSegmentHeap>
     </Manifest>
   </ItemDefinitionGroup>
-
 
   <!-- ===================== Debug ===================== -->
 

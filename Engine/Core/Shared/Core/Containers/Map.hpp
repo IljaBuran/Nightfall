@@ -1,6 +1,6 @@
 #pragma once
 
-#if defined(ILL_STL)
+#if defined(NF_USE_STL)
 
 #include <map>
 
@@ -13,5 +13,4 @@ template<
 
 using Map = std::map<Key, T, Compare, Allocator>;
 
-
-#endif // defined(ILL_STL)
+#endif // defined(NF_USE_STL)

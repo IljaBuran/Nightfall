@@ -1,117 +1,118 @@
 #pragma once
 
-#include "Common.hpp"
+#include "Types.hpp"
+#include "Containers/Vector.hpp"
 
 #include <memory>
-#include "Vector.hpp"
 
-using namespace Illulu;
-
-template <typename T>
-class SparseSet
+namespace NF
 {
-public:
+    template <typename T>
+    class SparseSet
+    {
+    public:
     
-    SparseSet(u32 capacity)
-        : m_capacity{ capacity },
-          m_sparse(std::make_unique<u32[]>(capacity)) {}
+        SparseSet(u32 capacity)
+            : m_capacity{ capacity },
+              m_sparse(std::make_unique<u32[]>(capacity)) {}
 
-    // returns true if it was added
-    // returns false if it was already in the set
-    bool Add(u32 id) noexcept
-    {
+        // returns true if it was added
+        // returns false if it was already in the set
+        bool Add(u32 id) noexcept
+        {
         
-        ILL_ASSERT(id < m_capacity);
+            ILL_ASSERT(id < m_capacity);
 
-        // TODO::!!!!
+            // TODO::!!!!
 
-        if (m_dense.size() >= m_capacity)
-        {
-            WARNING(L"[SparseSet] Capacity exceeded, enterying undefined state");
+            if (m_dense.size() >= m_capacity)
+            {
+                WARNING(L"[SparseSet] Capacity exceeded, enterying undefined state");
+            }
+
+            if (!Contains(id))
+            {
+                m_sparse[id] = static_cast<u32>(m_dense.size());
+                m_dense.emplace_back(id);
+
+                return true;
+            }
+
+            return false;
         }
 
-        if (!Contains(id))
+        // returns true if it was deleted successfully
+        // returns false if it was not deleted (element wasn't in the set)
+        bool Remove(u32 id) noexcept
         {
-            m_sparse[id] = static_cast<u32>(m_dense.size());
-            m_dense.emplace_back(id);
+            ILL_ASSERT(id < m_capacity);
 
-            return true;
+            const u32 indexInDense{ m_sparse[id] };
+
+            if (Contains(id))
+            {
+                const u32 last{ m_dense.back() };
+                m_dense[indexInDense] = last;
+                m_dense.pop_back();
+
+                m_sparse[last] = indexInDense;
+
+                return true;
+            }
+
+            return false;
         }
 
-        return false;
-    }
-
-    // returns true if it was deleted successfully
-    // returns false if it was not deleted (element wasn't in the set)
-    bool Remove(u32 id) noexcept
-    {
-        ILL_ASSERT(id < m_capacity);
-
-        const u32 indexInDense{ m_sparse[id] };
-
-        if (Contains(id))
+        bool Contains(u32 id) const noexcept
         {
-            const u32 last{ m_dense.back() };
-            m_dense[indexInDense] = last;
-            m_dense.pop_back();
+            ILL_ASSERT(id < m_capacity);
 
-            m_sparse[last] = indexInDense;
+            const u32 indexInDense{ m_sparse[id] };
 
-            return true;
+            return (indexInDense < m_dense.size() && id == m_dense[indexInDense]);
         }
 
-        return false;
-    }
+        T& Get(u32 id) noexcept
+        {
+            ILL_ASSERT(id < m_capacity);
+            ILL_ASSERT(Contains(id));
 
-    bool Contains(u32 id) const noexcept
-    {
-        ILL_ASSERT(id < m_capacity);
+            return m_data[id];
+        }
 
-        const u32 indexInDense{ m_sparse[id] };
+        const T& Get(u32 id) const noexcept
+        {
+            ILL_ASSERT(id < m_capacity);
+            ILL_ASSERT(Contains(id));
 
-        return (indexInDense < m_dense.size() && id == m_dense[indexInDense]);
-    }
+            return m_data[id];
+        }
 
-    T& Get(u32 id) noexcept
-    {
-        ILL_ASSERT(id < m_capacity);
-        ILL_ASSERT(Contains(id));
+        void Clear()
+        {
+            m_dense.clear();
+            m_data.clear();
+        }
 
-        return m_data[id];
-    }
+        // iterator
+        // we don't want to let user change the inner structure from outside
+        using iterator = Vector<u32>::const_iterator;
+        using const_iterator = Vector<u32>::const_iterator;
 
-    const T& Get(u32 id) const noexcept
-    {
-        ILL_ASSERT(id < m_capacity);
-        ILL_ASSERT(Contains(id));
+        iterator begin() noexcept { return m_dense.cbegin(); }
+        iterator end()   noexcept { return m_dense.cend(); }
 
-        return m_data[id];
-    }
+        const_iterator begin()  const noexcept { return m_dense.cbegin(); }
+        const_iterator end()    const noexcept { return m_dense.cend(); }
+        const_iterator cbegin() const noexcept { return m_dense.cbegin(); }
+        const_iterator cend()   const noexcept { return m_dense.cend(); }
 
-    void Clear()
-    {
-        m_dense.clear();
-        m_data.clear();
-    }
+    private:
 
-    // iterator
-    // we don't want to let user change the inner structure from outside
-    using iterator = Vector<u32>::const_iterator;
-    using const_iterator = Vector<u32>::const_iterator;
+        u32 m_capacity{ 0 };
 
-    iterator begin() noexcept { return m_dense.cbegin(); }
-    iterator end()   noexcept { return m_dense.cend(); }
-
-    const_iterator begin()  const noexcept { return m_dense.cbegin(); }
-    const_iterator end()    const noexcept { return m_dense.cend(); }
-    const_iterator cbegin() const noexcept { return m_dense.cbegin(); }
-    const_iterator cend()   const noexcept { return m_dense.cend(); }
-
-private:
-
-    u32 m_capacity{ 0 };
-
-    std::unique_ptr<uint32_t[]> m_sparse{};
-    Vector<u32> m_dense{};
-    Vector<T>   m_data{};
-};
+        std::unique_ptr<uint32_t[]> m_sparse{};
+        Vector<u32> m_dense{};
+        Vector<T>   m_data{};
+    };
+}

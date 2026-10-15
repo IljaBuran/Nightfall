@@ -11,7 +11,7 @@
 #define WARNING(message, ...) Logger::Log(LogType::WARNING, message, __VA_ARGS__)
 #define FATAL(message, ...) do                           \
 {                                                        \
-	Logger::Log(LogType::FATAL, message, __VA_ARGS__);  \
+	Logger::Log(LogType::FATAL, message, __VA_ARGS__);   \
 	__debugbreak();                                      \
 } while(0)
 

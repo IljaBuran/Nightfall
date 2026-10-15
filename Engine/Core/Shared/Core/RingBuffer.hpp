@@ -1,57 +1,58 @@
 #pragma once
 
-#include "Common.hpp"
-
-#include "Array.hpp"
+#include "Containers/Array.hpp"
 
 // TODO: this needs further functionaly, i'll implement it later (maybe hehe)
 
-template<typename T, std::uint32_t size>
-class RingBuffer
+namespace NF
 {
-public:
-
-	void Add(T&& element) noexcept
+	template<typename T, std::uint32_t size>
+	class RingBuffer
 	{
-		m_data[m_writeIndex] = std::move(element);
+	public:
 
-		m_writeIndex = (m_writeIndex + 1) % size;
-
-		if (m_count < size)
+		void Add(T&& element) noexcept
 		{
-			m_count++;
+			m_data[m_writeIndex] = std::move(element);
+
+			m_writeIndex = (m_writeIndex + 1) % size;
+
+			if (m_count < size)
+			{
+				m_count++;
+			}
 		}
-	}
 	
-	[[nodiscard]]
-	T& operator[](std::uint32_t index) noexcept
-	{
-		ILL_ASSERT(index < m_count);
+		[[nodiscard]]
+		T& operator[](std::uint32_t index) noexcept
+		{
+			ILL_ASSERT(index < m_count);
 
-		const std::uint32_t m_oldest{ m_count == size ? m_writeIndex : 0 };
+			const std::uint32_t m_oldest{ m_count == size ? m_writeIndex : 0 };
 
-		return m_data[(static_cast<std::uint64_t>(m_oldest) + index) % size];
-	}
+			return m_data[(static_cast<std::uint64_t>(m_oldest) + index) % size];
+		}
 
-	[[nodiscard]]
-	const T& operator[](std::uint32_t index) const noexcept
-	{
-		ILL_ASSERT(index < m_count);
+		[[nodiscard]]
+		const T& operator[](std::uint32_t index) const noexcept
+		{
+			ILL_ASSERT(index < m_count);
 
-		const std::uint32_t m_oldest{ m_count == size ? m_writeIndex : 0 };
+			const std::uint32_t m_oldest{ m_count == size ? m_writeIndex : 0 };
 
-		return m_data[(static_cast<std::uint64_t>(m_oldest) + index) % size];
-	}
+			return m_data[(static_cast<std::uint64_t>(m_oldest) + index) % size];
+		}
 
-	[[nodiscard]]
-	std::uint32_t Size() const noexcept
-	{
-		return m_count;
-	}
+		[[nodiscard]]
+		std::uint32_t Size() const noexcept
+		{
+			return m_count;
+		}
 
-private:
+	private:
 
-	std::array<T, size> m_data;
-	std::uint32_t m_writeIndex{};
-	std::uint32_t m_count{};
-};
+		std::array<T, size> m_data;
+		std::uint32_t m_writeIndex{};
+		std::uint32_t m_count{};
+	};
+}

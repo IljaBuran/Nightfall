@@ -1,6 +1,6 @@
 #pragma once
 
-#if defined(ILL_STL)
+#if defined(NF_USE_STL)
 #include <queue>
 
 template<
@@ -8,4 +8,4 @@ template<
     class Container = std::deque<T>
 >
 using Queue = std::queue<T, Container>;
-#endif // defined(ILL_STL)
+#endif // defined(NF_USE_STL)
