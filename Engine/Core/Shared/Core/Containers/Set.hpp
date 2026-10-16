@@ -2,14 +2,25 @@
 
 #if defined(NF_USE_STL)
 
-#include <set>
+    #include <set>
 
-template<
-    class Key,
-    class Compare = std::less<Key>,
-    class Allocator = std::allocator<Key>
->
+#endif
 
-using Set = std::set<Key, Compare, Allocator>;
+namespace NF
+{
+#if defined(NF_USE_STL)
 
-#endif // defined(NF_USE_STL)
+    template<
+        class Key,
+        class Compare = ::std::less<Key>,
+        class Allocator = ::std::allocator<Key>
+    >
+
+    using Set = ::std::set<Key, Compare, Allocator>;
+
+#else
+
+    #error "No custom STL implementation yet"
+
+#endif
+}

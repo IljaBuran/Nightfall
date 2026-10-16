@@ -1,9 +1,9 @@
 #pragma once
 
-#include "Types.hpp"
-#include "Containers/Vector.hpp"
+#include "Core/Types.hpp"
+#include "Core/Containers/Vector.hpp"
 
-#include <memory>
+#include "Core/Memory/Memory.hpp"
 
 namespace NF
 {

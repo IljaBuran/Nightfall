@@ -15,9 +15,13 @@ namespace NF
     using u32 = ::std::uint32_t;
     using u64 = ::std::uint64_t;
 
-    using usize = ::std::size_t;
-    using isize = ::std::ptrdiff_t;
+    using usize   = ::std::size_t;
+    using ptrdiff = ::std::ptrdiff_t;
+    
+    static_assert(sizeof(usize) == 8, "Nightfall currently supports only 64bit CPUs.");
 
     using f32 = float;
     using f64 = double;
+
+    static_assert(sizeof(f32) == 4 && sizeof(f64) == 8, "f32/f64 must be IEEE 32/64-bit.");
 }

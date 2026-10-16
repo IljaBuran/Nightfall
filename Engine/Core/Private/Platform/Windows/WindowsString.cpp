@@ -4,11 +4,11 @@
 
 namespace NF::Platform::Windows
 {
-    WideString Utf8ToWide(StringView str)
+    WString Utf8ToWide(StringView str)
     {
         if (str.empty())
         {
-            return WideString{};
+            return WString{};
         }
 
         const INT required = MultiByteToWideChar(
@@ -24,10 +24,10 @@ namespace NF::Platform::Windows
         {
             // TODO(ilja): this is bad idea to let this fail silently...
         
-            return WideString{};
+            return WString{};
         }
 
-        WideString result;
+        WString result;
         result.resize(required);
 
         const INT converted = MultiByteToWideChar(
@@ -41,13 +41,13 @@ namespace NF::Platform::Windows
 
         if (converted == 0)
         {
-            return WideString{};
+            return WString{};
         }
 
         return result;
     }
 
-    String WideToUtf8(WideStringView str)
+    String WideToUtf8(WStringView str)
     {
         if (str.empty())
         {

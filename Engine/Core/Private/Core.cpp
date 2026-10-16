@@ -1,11 +1,14 @@
 #include "pch.hpp"
 
+#include "Logging/LogInternal.hpp"
+
 #include "Core/Core.hpp"
 
 namespace NF
 {
     void Core::Init()
     {
+        Log::RegisterDefaultSinks();
     }
 
     void Core::BeginFrame()
@@ -30,5 +33,6 @@ namespace NF
 
     void Core::Shutdown()
     {
+        Log::Shutdown();
     }
 }
