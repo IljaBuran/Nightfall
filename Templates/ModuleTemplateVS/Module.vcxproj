@@ -30,7 +30,7 @@
 
   <ItemDefinitionGroup>
     <ClCompile>
-      <AdditionalIncludeDirectories>$(ProjectDir)Shared;$(ProjectDir)Private;$(SolutionDir)Engine\Core\Shared;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir);$(EngineRoot)NF\Core\Shared;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
   </ItemDefinitionGroup>
 
@@ -38,14 +38,14 @@
        Don't add settings here: anything in this file overrides the shared .props. -->
 
   <ItemGroup>
-    <ClInclude Include="Shared\$safeprojectname$\$safeprojectname$.hpp" />
+    <ClInclude Include="Module.hpp" />
     <ClInclude Include="Private\pch.hpp" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Private\pch.cpp">
       <PrecompiledHeader>Create</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="Private\$safeprojectname$.cpp" />
+    <ClCompile Include="Private\Module.cpp" />
   </ItemGroup>
 
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

@@ -32,7 +32,7 @@
 
       <!-- Every module has its own pch.hpp + pch.cpp -->
       <PrecompiledHeader>Use</PrecompiledHeader>
-      <PrecompiledHeaderFile>pch.hpp</PrecompiledHeaderFile>
+      <PrecompiledHeaderFile>Private/pch.hpp</PrecompiledHeaderFile>
 
       <!-- Force UTF8 -->
       <AdditionalOptions>/utf-8 %(AdditionalOptions)</AdditionalOptions>

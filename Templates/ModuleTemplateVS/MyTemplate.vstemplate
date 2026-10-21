@@ -18,15 +18,15 @@
     <Project File="Module.vcxproj" TargetFileName="$safeprojectname$.vcxproj" ReplaceParameters="true">
 
       <Folder Name="Shared" TargetFolderName="Shared">
-        <Folder Name="Module" TargetFolderName="$safeprojectname$">
-          <ProjectItem ReplaceParameters="true" TargetFileName="$safeprojectname$.hpp">Module.hpp</ProjectItem>
-        </Folder>
+        <Folder Name="Module" TargetFolderName="$safeprojectname$"/>
       </Folder>
+
+      <ProjectItem ReplaceParameters="true">Module.hpp</ProjectItem>
 
       <Folder Name="Private" TargetFolderName="Private">
         <ProjectItem ReplaceParameters="false">pch.hpp</ProjectItem>
         <ProjectItem ReplaceParameters="false">pch.cpp</ProjectItem>
-        <ProjectItem ReplaceParameters="true" TargetFileName="$safeprojectname$.cpp">Module.cpp</ProjectItem>
+        <ProjectItem ReplaceParameters="true">Module.cpp</ProjectItem>
       </Folder>
 
     </Project>

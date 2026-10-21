@@ -1,7 +1,6 @@
 <Solution>
   <Configurations>
     <Platform Name="x64" />
-    <Platform Name="x86" />
   </Configurations>
   <Folder Name="/Editor/">
     <Project Path="Editor/NightfallEditor.csproj">
@@ -9,8 +8,24 @@
     </Project>
   </Folder>
   <Folder Name="/Engine/">
-    <Project Path="Engine/Core/Core.vcxproj" Id="607c5b49-f6a5-4990-8940-eb59572ca084">
-      <Platform Project="x64" />
+    <File Path="Engine/NF/NightfallConfig.hpp" />
+  </Folder>
+  <Folder Name="/Engine/NF/">
+    <Project Path="Engine/NF/Application/Application.vcxproj" Id="991ccdcf-dfc0-44d6-8546-a1f6528cad04">
+      <BuildDependency Project="Engine/NF/Core/Core.vcxproj" />
+    </Project>
+    <Project Path="Engine/NF/Core/Core.vcxproj" Id="607c5b49-f6a5-4990-8940-eb59572ca084" />
+    <Project Path="Engine/NF/LogSink.VSDebug/LogSink.VSDebug.vcxproj" Id="55e0033f-f46a-439a-997b-3739b2ba13d5">
+      <BuildDependency Project="Engine/NF/Core/Core.vcxproj" />
+    </Project>
+    <Project Path="Engine/NF/LogSink.WinConsole/LogSink.WinConsole.vcxproj" Id="03488e80-1a16-4610-b469-665ec6843730">
+      <BuildDependency Project="Engine/NF/Core/Core.vcxproj" />
     </Project>
   </Folder>
+  <Project Path="TestApp/TestApp.vcxproj" Id="d9310147-0438-4e48-b76e-b79675e94ab3">
+    <BuildDependency Project="Engine/NF/Application/Application.vcxproj" />
+    <BuildDependency Project="Engine/NF/Core/Core.vcxproj" />
+    <BuildDependency Project="Engine/NF/LogSink.VSDebug/LogSink.VSDebug.vcxproj" />
+    <BuildDependency Project="Engine/NF/LogSink.WinConsole/LogSink.WinConsole.vcxproj" />
+  </Project>
 </Solution>
