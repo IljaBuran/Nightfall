@@ -1,69 +1,69 @@
-#include <NF/NightfallConfig.hpp>
 #include <Application/Application.hpp>
 
-#include <NF/Core/Module.hpp>
-#include <NF/LogSink.WinConsole/Module.hpp>
-#include <NF/LogSink.VSDebug/Module.hpp>
-//#include <NF/Window/Module.hpp>
-//#include <NF/Input/Module.hpp>
-//#include <NF/Renderer/Module.hpp>
+#include <Core/Core.hpp>
+#include <WinConsole/WinConsole.hpp>
+#include <VSConsole/VSConsole.hpp>
+#include <Window/Window.hpp>
 
 #include <Core/Diagnostics/Debugging.hpp>
 #include <Core/Logging/Logging.hpp>
 
 int NF::Application::Main()
 {
-    ::NF::Module::Core::Init();
-    ::NF::Module::LogSink_WinConsole::Init();
-    ::NF::Module::LogSink_VSDebug::Init();
-    //::NF::Window::Init();
-    //::NF::Input::Init();
-    //::NF::Renderer::Init();
-
-    i32 i{ 0 };
-
-    while (true)
+    const ::NF::Window::Config config
     {
-        ::NF::Module::Core::BeginFrame();
-        ::NF::Module::LogSink_WinConsole::BeginFrame();
-        ::NF::Module::LogSink_VSDebug::BeginFrame();
+        .name{"Nightfall Window"},
+        .width{},
+        .height{}
+    };
+    
+    ::NF::Core::Init();
+    ::NF::WinConsole::Init();
+    ::NF::VSConsole::Init();
+    ::NF::Window::Init(config);
 
-        ::NF::Module::Core::PreUpdate();
-        ::NF::Module::LogSink_WinConsole::PreUpdate();
-        ::NF::Module::LogSink_VSDebug::PreUpdate();
+    while (!Window::ShouldClose())
+    {
+        ::NF::Core::BeginFrame();
+        ::NF::WinConsole::BeginFrame();
+        ::NF::VSConsole::BeginFrame();
+        ::NF::Window::BeginFrame();
 
-        ::NF::Module::Core::FixedUpdate();
-        ::NF::Module::LogSink_WinConsole::FixedUpdate();
-        ::NF::Module::LogSink_VSDebug::FixedUpdate();
+        ::NF::Core::PreUpdate();
+        ::NF::WinConsole::PreUpdate();
+        ::NF::VSConsole::PreUpdate();
+        ::NF::Window::PreUpdate();
 
-        ::NF::Module::Core::Update();
-        ::NF::Module::LogSink_WinConsole::Update();
-        ::NF::Module::LogSink_VSDebug::Update();
+        ::NF::Core::FixedUpdate();
+        ::NF::WinConsole::FixedUpdate();
+        ::NF::VSConsole::FixedUpdate();
+        ::NF::Window::FixedUpdate();
 
-        ::NF::Module::Core::PostUpdate();
-        ::NF::Module::LogSink_WinConsole::PostUpdate();
-        ::NF::Module::LogSink_VSDebug::PostUpdate();
+        ::NF::Core::Update();
+        ::NF::WinConsole::Update();
+        ::NF::VSConsole::Update();
+        ::NF::Window::Update();
 
-        ::NF::Module::Core::Render();
-        ::NF::Module::LogSink_WinConsole::Render();
-        ::NF::Module::LogSink_VSDebug::Render();
+        ::NF::Core::PostUpdate();
+        ::NF::WinConsole::PostUpdate();
+        ::NF::VSConsole::PostUpdate();
+        ::NF::Window::PostUpdate();
 
-        ::NF::Module::Core::EndFrame();
-        ::NF::Module::LogSink_WinConsole::EndFrame();
-        ::NF::Module::LogSink_VSDebug::EndFrame();
+        ::NF::Core::Render();
+        ::NF::WinConsole::Render();
+        ::NF::VSConsole::Render();
+        ::NF::Window::Render();
 
-        NF_LOG_INFO("i: {}", i++);
-
-        if (i == 100)
-        {
-            NF_LOG_ERROR("i==100");
-            NF_DEBUGBREAK();
-        }
+        ::NF::Core::EndFrame();
+        ::NF::WinConsole::EndFrame();
+        ::NF::VSConsole::EndFrame();
+        ::NF::Window::EndFrame();
     }
 
-    ::NF::Module::LogSink_VSDebug::Shutdown();
-    ::NF::Module::LogSink_WinConsole::Shutdown();
-    ::NF::Module::Core::Shutdown();
+    ::NF::Window::Shutdown();
+    ::NF::VSConsole::Shutdown();
+    ::NF::WinConsole::Shutdown();
+    ::NF::Core::Shutdown();
 
     return 0;
 }

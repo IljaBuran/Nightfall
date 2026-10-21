@@ -1,8 +1,8 @@
 #include "Private/pch.hpp"
 
-#include "Module.hpp"
+#include "$safeprojectname$/$safeprojectname$.hpp"
 
-namespace NF::Module
+namespace NF
 {
     void $safeprojectname$::Init()
     {

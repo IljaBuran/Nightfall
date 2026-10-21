@@ -5,16 +5,16 @@
 
 #if defined(_DEBUG)
 
-    #define NF_ASSERT(expr)                                                         \
-            do                                                                      \
-            {                                                                       \
-                if (!(expr)) [[unlikely]]                                           \
-                {                                                                   \
+    #define NF_ASSERT(expr)                                                                       \
+            do                                                                                    \
+            {                                                                                     \
+                if (!(expr)) [[unlikely]]                                                         \
+                {                                                                                 \
                     if (::NF::Diagnostics::Assert::OnAssertFailed({ #expr, __FILE__, __LINE__ })) \
-                    {                                                               \
-                        NF_DEBUGBREAK();                                            \
-                    }                                                               \
-                }                                                                   \
+                    {                                                                             \
+                        NF_DEBUGBREAK();                                                          \
+                    }                                                                             \
+                }                                                                                 \
             } while (false)
     
     #define NF_VERIFY(expr) NF_ASSERT(expr)

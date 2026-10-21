@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Shared/Core/STL/String.hpp"
+#include "Core/STL/String.hpp"
 
 #define WIN_OK(HRES_EXPR) SUCCEEDED(HRES_EXPR)
 #define WIN_FAIL(HRES_EXPR) FAILED(HRES_EXPR)

@@ -30,7 +30,7 @@
   <!-- Everything else (compiler settings, output folders, toolset) comes from Engine/Directory.Build.props.
        Don't add settings here: anything in this file overrides the shared .props. -->
   <ItemGroup>
-    <ClInclude Include="Module.hpp" />
+    <ClInclude Include="Shared\Core\Core.hpp" />
     <ClInclude Include="Shared\Core\Diagnostics\Assert.hpp" />
     <ClInclude Include="Shared\Core\Diagnostics\Debugging.hpp" />
     <ClInclude Include="Shared\Core\Logging\ISink.hpp" />
@@ -64,7 +64,7 @@
   <ItemGroup>
     <ClCompile Include="Private\Debug.cpp" />
     <ClCompile Include="Private\Logging\Logging.cpp" />
-    <ClCompile Include="Private\Module.cpp" />
+    <ClCompile Include="Private\Core.cpp" />
     <ClCompile Include="Private\pch.cpp">
       <PrecompiledHeader>Create</PrecompiledHeader>
     </ClCompile>

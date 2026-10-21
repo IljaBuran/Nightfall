@@ -15,6 +15,7 @@
     <Keyword>Win32Proj</Keyword>
     <ProjectGuid>{03488e80-1a16-4610-b469-665ec6843730}</ProjectGuid>
     <RootNamespace>LogSink_WinConsole</RootNamespace>
+    <ProjectName>WinConsole</ProjectName>
   </PropertyGroup>
   <!-- Engine/Directory.Build.props is imported automatically by this line -->
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -24,21 +25,19 @@
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <ItemDefinitionGroup>
     <ClCompile>
-      <AdditionalIncludeDirectories>$(ProjectDir);$(EngineRoot)NF\Core\Shared;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir);$(ProjectDir)\Shared;$(EngineRoot)NF\Core\Shared;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
   </ItemDefinitionGroup>
   <!-- Everything else (compiler settings, output folders, toolset) comes from Engine/Directory.Build.props.
        Don't add settings here: anything in this file overrides the shared .props. -->
   <ItemGroup>
-    <ClInclude Include="Module.hpp" />
     <ClInclude Include="Private\pch.hpp" />
-    <ClInclude Include="Private\WinConsole.hpp" />
+    <ClInclude Include="Shared\WinConsole\WinConsole.hpp" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Private\pch.cpp">
       <PrecompiledHeader>Create</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="Private\Module.cpp" />
     <ClCompile Include="Private\WinConsole.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

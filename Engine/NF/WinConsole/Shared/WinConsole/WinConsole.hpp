@@ -1,21 +1,21 @@
 #pragma once
 
-#include <Core/Utility/Helpers.hpp>
+#include <Core/Module.hpp>
 #include <Core/Logging/ISink.hpp>
 
-namespace NF::Logging
+#include <Core/Platform/Windows/WinInclude.hpp>
+
+namespace NF
 {
     class WinConsole final : public ::NF::Logging::ISink
     {
+        NF_MODULE(WinConsole); // this should to stay in private
+
     public:
 
-        NF_NOCOPY(WinConsole);
-        NF_NOMOVE(WinConsole);
-
         WinConsole();
-
         ~WinConsole();
-
+      
         void Write(const ::NF::Logging::Record& record) override;
 
     private:
@@ -26,7 +26,8 @@ namespace NF::Logging
 
     private:
 
-        HANDLE m_consoleHandle{};
-        BOOL m_ownsConsole{ false };
+        inline static HANDLE m_consoleHandle{};
+        inline static BOOL m_ownsConsole{ false };
     };
+
 }

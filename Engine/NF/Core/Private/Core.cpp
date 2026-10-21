@@ -1,8 +1,8 @@
 #include "Private/pch.hpp"
 
-#include "Module.hpp"
+#include "Core/Core.hpp"
 
-namespace NF::Module
+namespace NF
 {
     void Core::Init(){}
     void Core::BeginFrame(){}
@@ -13,5 +13,4 @@ namespace NF::Module
     void Core::Render(){}
     void Core::EndFrame(){}
     void Core::Shutdown(){}
-
 }

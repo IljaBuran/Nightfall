@@ -59,14 +59,14 @@
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpplatest</LanguageStandard>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
-      <AdditionalIncludeDirectories>$(SolutionDir)Engine\;$(SolutionDir)Engine\NF\Application\Shared\;$(SolutionDir)Engine\NF\Core\Shared\;$(SolutionDir)Engine\NF\LogSink.VSDebug\Shared\;$(SolutionDir)Engine\NF\LogSink.WinConsole\Shared\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)Engine\NF\Application\Shared\;$(SolutionDir)Engine\NF\Core\Shared\;$(SolutionDir)Engine\NF\VSConsole\Shared\;$(SolutionDir)Engine\NF\WinConsole\Shared\;$(SolutionDir)Engine\NF\Window\Shared\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <FloatingPointModel>Fast</FloatingPointModel>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>$(SolutionDir)Build\Engine\$(Platform)\$(Configuration)\</AdditionalLibraryDirectories>
-      <AdditionalDependencies>Core.lib;LogSink.WinConsole.lib;LogSink.VSDebug.lib;Application.lib;$(CoreLibraryDependencies);%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>Core.lib;WinConsole.lib;VSConsole.lib;Application.lib;Window.lib;$(CoreLibraryDependencies);%(AdditionalDependencies)</AdditionalDependencies>
       <EntryPointSymbol>wWinMainCRTStartup</EntryPointSymbol>
     </Link>
     <Manifest>
@@ -84,14 +84,14 @@
       <LanguageStandard>stdcpplatest</LanguageStandard>
       <TreatWarningAsError>true</TreatWarningAsError>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
-      <AdditionalIncludeDirectories>$(SolutionDir)Engine\;$(SolutionDir)Engine\NF\Application\Shared\;$(SolutionDir)Engine\NF\Core\Shared\;$(SolutionDir)Engine\NF\LogSink.VSDebug\Shared\;$(SolutionDir)Engine\NF\LogSink.WinConsole\Shared\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)Engine\NF\Application\Shared\;$(SolutionDir)Engine\NF\Core\Shared\;$(SolutionDir)Engine\NF\VSConsole\Shared\;$(SolutionDir)Engine\NF\WinConsole\Shared\;$(SolutionDir)Engine\NF\Window\Shared\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <FloatingPointModel>Fast</FloatingPointModel>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>$(SolutionDir)Build\Engine\$(Platform)\$(Configuration)\</AdditionalLibraryDirectories>
-      <AdditionalDependencies>Core.lib;LogSink.WinConsole.lib;LogSink.VSDebug.lib;Application.lib;$(CoreLibraryDependencies);%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>Core.lib;WinConsole.lib;VSConsole.lib;Application.lib;Window.lib;$(CoreLibraryDependencies);%(AdditionalDependencies)</AdditionalDependencies>
       <EntryPointSymbol>wWinMainCRTStartup</EntryPointSymbol>
     </Link>
     <Manifest>

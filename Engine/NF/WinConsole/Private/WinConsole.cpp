@@ -1,9 +1,46 @@
 #include <Private/pch.hpp>
 
-#include <Private/WinConsole.hpp>
+#include <WinConsole/WinConsole.hpp>
 
-namespace NF::Logging
+namespace NF
 {
+    void WinConsole::Init()
+    {
+        ::NF::Logging::AddSink(MakeUnique<WinConsole>());
+    }
+
+    void WinConsole::BeginFrame()
+    {
+    }
+
+    void WinConsole::PreUpdate()
+    {
+    }
+
+    void WinConsole::FixedUpdate()
+    {
+    }
+
+    void WinConsole::Update()
+    {
+    }
+
+    void WinConsole::PostUpdate()
+    {
+    }
+
+    void WinConsole::Render()
+    {
+    }
+
+    void WinConsole::EndFrame()
+    {
+    }
+
+    void WinConsole::Shutdown()
+    {
+    }
+
     WinConsole::WinConsole()
     {
         if (!GetConsoleWindow())
