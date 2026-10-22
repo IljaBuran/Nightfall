@@ -4,9 +4,18 @@
 
 namespace NF
 {
+    namespace
+    {
+        constexpr WORD DefaultAttributes = FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_BLUE;
+        HANDLE m_consoleHandle{};
+        BOOL m_ownsConsole{ false };
+
+        WORD AttributesForLevel(::NF::Logging::Level level);
+    }
+
     void WinConsole::Init()
     {
-        ::NF::Logging::AddSink(MakeUnique<WinConsole>());
+        ::NF::Logging::AddSink(UniquePtr<WinConsole>(new WinConsole()));
     }
 
     void WinConsole::BeginFrame()
@@ -41,6 +50,7 @@ namespace NF
     {
     }
 
+
     WinConsole::WinConsole()
     {
         if (!GetConsoleWindow())
@@ -72,7 +82,7 @@ namespace NF
     void WinConsole::Write(const ::NF::Logging::Record& record)
     {
         DWORD written{ 0 };
-        WString converted{ ::NF::Windows::Utf8ToWide(record.text) };
+        WString converted{ ::NF::OS::Windows::Utf8ToWide(record.text) };
         converted += L"\n";
 
         SetConsoleTextAttribute(
@@ -80,7 +90,13 @@ namespace NF
             AttributesForLevel(record.level)
         );
 
-        WriteConsoleW(m_consoleHandle, converted.data(), static_cast<DWORD>(converted.size()), &written, nullptr);
+        WriteConsoleW(
+            m_consoleHandle, 
+            converted.data(), 
+            static_cast<DWORD>(converted.size()), 
+            &written, 
+            nullptr
+        );
 
         SetConsoleTextAttribute(
             m_consoleHandle,
@@ -88,16 +104,19 @@ namespace NF
         );
     }
 
-    WORD WinConsole::AttributesForLevel(::NF::Logging::Level level)
+    namespace
     {
-        switch (level)
+        WORD AttributesForLevel(::NF::Logging::Level level)
         {
-            case ::NF::Logging::Level::Info:    return DefaultAttributes | FOREGROUND_INTENSITY;                  // white
-            case ::NF::Logging::Level::Warning: return FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_INTENSITY;  // yellow
-            case ::NF::Logging::Level::Error:   return FOREGROUND_RED | FOREGROUND_INTENSITY;                     // red
-            case ::NF::Logging::Level::Fatal:   return BACKGROUND_RED | DefaultAttributes | FOREGROUND_INTENSITY; // white on red
-            case ::NF::Logging::Level::Count:   break;
+            switch (level)
+            {
+                case ::NF::Logging::Level::Info:    return DefaultAttributes | FOREGROUND_INTENSITY;                  // white
+                case ::NF::Logging::Level::Warning: return FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_INTENSITY;  // yellow
+                case ::NF::Logging::Level::Error:   return FOREGROUND_RED | FOREGROUND_INTENSITY;                     // red
+                case ::NF::Logging::Level::Fatal:   return BACKGROUND_RED | DefaultAttributes | FOREGROUND_INTENSITY; // white on red
+                case ::NF::Logging::Level::Count:   break;
+            }
+            return DefaultAttributes;
         }
-        return DefaultAttributes;
     }
 }

@@ -1,10 +1,10 @@
 #include "Private/pch.hpp"
 
-#include "Shared/Core/Platform/Windows/WinString.hpp"
+#include "Core/Platform/Windows/WinString.hpp"
 
-#include "Shared/Core/Types.hpp"
+#include "Core/Types.hpp"
 
-namespace NF::Diagnostics::Debugging::Windows
+namespace NF::OS::Windows
 {
     String TranslateHResult(HRESULT hr)
     {
@@ -16,7 +16,7 @@ namespace NF::Diagnostics::Debugging::Windows
         if (length == 0)
             return std::format("Unknown error 0x{:08X}", static_cast<u32>(hr));
 
-        String result = ::NF::Windows::WideToUtf8({ buffer, length });
+        String result = ::NF::OS::Windows::WideToUtf8({ buffer, length });
         LocalFree(buffer);
 
         while (!result.empty() && (result.back() == '\n' || result.back() == '\r'))

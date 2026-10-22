@@ -15,7 +15,7 @@
     }                                                                         \
 }
 
-namespace NF::Windows
+namespace NF::Diagnostics::Debugging::Windows
 {
     String TranslateHResult(HRESULT hRes);
 }

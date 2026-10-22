@@ -15,7 +15,7 @@
 #endif
 
 
-namespace NF::Diagnostics::Assert
+namespace NF::Diagnostics
 {
     struct AssertInfo
     {

@@ -6,17 +6,27 @@
 #include <Window/Window.hpp>
 
 #include <Core/Diagnostics/Debugging.hpp>
+#include <Core/Diagnostics/Assert.hpp>
 #include <Core/Logging/Logging.hpp>
 
 int NF::Application::Main()
 {
     const ::NF::Window::Config config
     {
-        .name{"Nightfall Window"},
-        .width{},
-        .height{}
+        .name{ "Nightfall Window" },
+        .width{ 1920 },
+        .height{ 1080 }
     };
     
+    auto assertHandle = [](const ::NF::Diagnostics::AssertInfo& info) -> bool
+    {
+        NF_LOG_ERROR("Assert failed.\n File name: {}\n Expression: {}\n Line: {}", info.fileName, info.expression, info.line);
+
+        return true;
+    };
+
+    ::NF::Diagnostics::SetAssertHandler(assertHandle);
+
     ::NF::Core::Init();
     ::NF::WinConsole::Init();
     ::NF::VSConsole::Init();

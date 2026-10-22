@@ -20,8 +20,7 @@ namespace NF
         const WCHAR* WINDOW_CLASS_NAME = L"NightfallGame";
         constexpr DWORD winStyle{ WS_OVERLAPPED | WS_CAPTION | WS_SYSMENU | WS_THICKFRAME | WS_MINIMIZEBOX | WS_MAXIMIZEBOX };
 
-        static
-        LRESULT WindowProc(HWND hWnd, u32 uMsg, WPARAM wParam, LPARAM lParam) noexcept;
+        LRESULT CALLBACK WindowProc(HWND hWnd, u32 uMsg, WPARAM wParam, LPARAM lParam) noexcept;
     }
 
     void Window::Init()
@@ -32,20 +31,16 @@ namespace NF
 
     void Window::Init(const Config& config)
     {
-        SetProcessDpiAwarenessContext(
-            DPI_AWARENESS_CONTEXT_PER_MONITOR_AWARE_V2
-        );
-        
-        WNDCLASSEX wc
+        WNDCLASSEXW wc
         {
             .cbSize = sizeof(WNDCLASSEX),
             .style = CS_DBLCLKS | CS_HREDRAW | CS_VREDRAW,
             .lpfnWndProc = WindowProc,
             .cbClsExtra{},
             .cbWndExtra{},
-            .hInstance = GetModuleHandle(nullptr),
+            .hInstance = GetModuleHandleW(nullptr),
             .hIcon{},
-            .hCursor = LoadCursor(nullptr, IDC_ARROW),
+            .hCursor = LoadCursorW(nullptr, IDC_ARROW),
             .hbrBackground{},
             .lpszMenuName{},
             .lpszClassName = WINDOW_CLASS_NAME,
@@ -54,13 +49,15 @@ namespace NF
 
         NF_VERIFY(RegisterClassEx(&wc));
 
+        UINT dpi{ GetDpiForSystem() };
+
         if (config.width == 0 || config.height == 0)
         {
             // size of client window = 3/4 * the monitor's size
-            i32 monitorWidth = GetSystemMetrics(SM_CXSCREEN);
-            i32 monitorHeight = GetSystemMetrics(SM_CYSCREEN);
+            i32 monitorWidth = GetSystemMetricsForDpi(SM_CXSCREEN, dpi);
+            i32 monitorHeight = GetSystemMetricsForDpi(SM_CYSCREEN, dpi);
 
-            width = static_cast<i32>(0.75f * monitorWidth);
+            width  = static_cast<i32>(0.75f * monitorWidth);
             height = static_cast<i32>(0.75f * monitorHeight);
         }
         else
@@ -70,11 +67,30 @@ namespace NF
         }
 
         RECT clientRect = { 0, 0, static_cast<i32>(width), static_cast<i32>(height) };
-        AdjustWindowRectEx(&clientRect, winStyle, false, 0);
 
-        WString windowName = ::NF::Windows::Utf8ToWide(config.name);
+        AdjustWindowRectExForDpi(&clientRect, winStyle, false, 0, dpi);
 
-        //todo: parent window for editor!!!
+        WString windowName = ::NF::OS::Windows::Utf8ToWide(config.name);
+
+        i32 x{ CW_USEDEFAULT };
+        i32 y{ CW_USEDEFAULT };
+
+        // needs to happen after AdjustWindowRectEx
+        const i32 windowW{ clientRect.right - clientRect.left };
+        const i32 windowH{ clientRect.bottom - clientRect.top };
+
+        // todo: parent window for editor!!!
+        if (!config.handle)
+        {
+            HMONITOR monitor{ MonitorFromPoint({ 0, 0 }, MONITOR_DEFAULTTOPRIMARY) };
+            MONITORINFO info{ .cbSize = sizeof(MONITORINFO) };
+            GetMonitorInfoW(monitor, &info);
+
+            const RECT& work{ info.rcWork };
+
+            x = work.left + (work.right - work.left - windowW) / 2;
+            y = work.top + (work.bottom - work.top - windowH) / 2;
+        }
 
         // create window
         nativeWindowHandle = CreateWindowEx(
@@ -82,9 +98,9 @@ namespace NF
             WINDOW_CLASS_NAME,
             windowName.data(),
             winStyle,
-            CW_USEDEFAULT,
-            CW_USEDEFAULT,
-            clientRect.right - clientRect.left,
+            x,
+            y,
+            clientRect.right  - clientRect.left,
             clientRect.bottom - clientRect.top,
             nullptr,
             nullptr,
@@ -119,6 +135,8 @@ namespace NF
 
     void Window::Shutdown()
     {
+        UnregisterClassW(WINDOW_CLASS_NAME, GetModuleHandleW(nullptr));
+        
         if (nativeWindowHandle)
         {
             DestroyWindow(nativeWindowHandle);
@@ -157,7 +175,7 @@ namespace NF
 
     namespace
     {
-        LRESULT WindowProc(
+        LRESULT CALLBACK WindowProc(
             [[maybe_unused]] HWND hWnd,
             u32 uMsg,
             WPARAM wParam,
@@ -313,6 +331,23 @@ namespace NF
                             return 0;
                         }
                     }
+                    return 0;
+                }
+
+                case WM_DPICHANGED:
+                {
+                    RECT* pRect{ reinterpret_cast<RECT*>(lParam) };
+
+                    SetWindowPos(
+                        hWnd,
+                        nullptr,
+                        pRect->left,
+                        pRect->top,
+                        pRect->right - pRect->left,
+                        pRect->bottom - pRect->top,
+                        SWP_NOZORDER | SWP_NOACTIVATE
+                    );
+
                     return 0;
                 }
 

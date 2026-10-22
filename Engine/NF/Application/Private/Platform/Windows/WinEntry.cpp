@@ -9,5 +9,9 @@ int WINAPI wWinMain(
     [[maybe_unused]] _In_     int nCmdShow
 )
 {
+    SetProcessDpiAwarenessContext(
+        DPI_AWARENESS_CONTEXT_PER_MONITOR_AWARE_V2 // this restricts to post v1703 Windows 10 version 
+    );
+
     return ::NF::Application::Main();
 }

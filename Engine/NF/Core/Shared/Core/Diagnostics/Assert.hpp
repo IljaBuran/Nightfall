@@ -10,7 +10,7 @@
             {                                                                                     \
                 if (!(expr)) [[unlikely]]                                                         \
                 {                                                                                 \
-                    if (::NF::Diagnostics::Assert::OnAssertFailed({ #expr, __FILE__, __LINE__ })) \
+                    if (::NF::Diagnostics::OnAssertFailed({ #expr, __FILE__, __LINE__ })) \
                     {                                                                             \
                         NF_DEBUGBREAK();                                                          \
                     }                                                                             \

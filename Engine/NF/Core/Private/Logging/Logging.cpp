@@ -1,12 +1,12 @@
 #include "Private/pch.hpp"
 
-#include "Shared/Core/Logging/ISink.hpp"
+#include "Core/Logging/ISink.hpp"
 
-#include "Shared/Core/STL/RingBuffer.hpp"
-#include "Shared/Core/STL/Vector.hpp"
-#include "Shared/Core/STL/Memory.hpp"
+#include "Core/STL/RingBuffer.hpp"
+#include "Core/STL/Vector.hpp"
+#include "Core/STL/Memory.hpp"
 
-#include "Shared/Core/Diagnostics/Assert.hpp"
+#include "Core/Diagnostics/Assert.hpp"
 
 // TODO(ilja): MULTITHREADING -> this will fail badly when threads will be introduced
 
@@ -15,6 +15,7 @@ namespace NF::Logging
     namespace
     {
         constexpr u32 logHistorySize{ 256u };
+
         struct State
         {
             RingBuffer<Record, logHistorySize> messageHistory;

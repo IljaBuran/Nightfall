@@ -11,10 +11,12 @@ namespace NF
     {
         NF_MODULE(VSConsole); // keep this in private
 
-    public:
-
         VSConsole();
+
+    public:
+        
         ~VSConsole();
+
         void Write(const ::NF::Logging::Record& record) override;
     };
 }

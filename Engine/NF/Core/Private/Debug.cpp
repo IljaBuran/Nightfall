@@ -1,8 +1,8 @@
 #include "Private/pch.hpp"
 
-#include "Shared/Core/Diagnostics/Debugging.hpp"
+#include "Core/Diagnostics/Debugging.hpp"
 
-namespace NF::Diagnostics::Assert
+namespace NF::Diagnostics
 {
     static AssertHandler s_handler = nullptr;
     

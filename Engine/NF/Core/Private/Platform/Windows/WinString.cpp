@@ -1,8 +1,8 @@
 #include "Private/pch.hpp"
 
-#include "Shared/Core/Platform/Windows/WinString.hpp"
+#include "Core/Platform/Windows/WinString.hpp"
 
-namespace NF::Windows
+namespace NF::OS::Windows
 {
     WString Utf8ToWide(StringView str)
     {

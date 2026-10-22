@@ -6,7 +6,7 @@ namespace NF
 {
     void VSConsole::Init()
     {
-        ::NF::Logging::AddSink(MakeUnique<VSConsole>());
+        ::NF::Logging::AddSink(UniquePtr<VSConsole>(new VSConsole()));
     }
 
     void VSConsole::BeginFrame()
@@ -51,7 +51,7 @@ namespace NF
 
     void VSConsole::Write(const ::NF::Logging::Record& record)
     {
-        WString converted{ ::NF::Windows::Utf8ToWide(record.text) };
+        WString converted{ ::NF::OS::Windows::Utf8ToWide(record.text) };
         converted += L'\n';
         OutputDebugStringW(converted.data());
     }
