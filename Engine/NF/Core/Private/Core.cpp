@@ -4,7 +4,7 @@
 
 namespace NF
 {
-    void Core::Init(){}
+    void Core::Init([[maybe_unused]] Configuration& config){}
     void Core::BeginFrame(){}
     void Core::PreUpdate(){}
     void Core::FixedUpdate(){}

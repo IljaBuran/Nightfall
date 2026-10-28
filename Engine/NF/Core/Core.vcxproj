@@ -30,22 +30,28 @@
   <!-- Everything else (compiler settings, output folders, toolset) comes from Engine/Directory.Build.props.
        Don't add settings here: anything in this file overrides the shared .props. -->
   <ItemGroup>
+    <ClInclude Include="Shared\Core\Configuration.hpp" />
     <ClInclude Include="Shared\Core\Core.hpp" />
     <ClInclude Include="Shared\Core\Diagnostics\Assert.hpp" />
     <ClInclude Include="Shared\Core\Diagnostics\Debugging.hpp" />
     <ClInclude Include="Shared\Core\Logging\ISink.hpp" />
     <ClInclude Include="Shared\Core\Logging\Logging.hpp" />
+    <ClInclude Include="Shared\Core\Math\BasicMath.hpp" />
     <ClInclude Include="Shared\Core\Module.hpp" />
     <ClInclude Include="Shared\Core\Platform\Compiler.hpp" />
+    <ClInclude Include="Shared\Core\Platform\Windows\WinUtil.hpp" />
     <ClInclude Include="Shared\Core\STL\Array.hpp" />
     <ClInclude Include="Shared\Core\STL\BitSet.hpp" />
     <ClInclude Include="Shared\Core\STL\Format.hpp" />
+    <ClInclude Include="Shared\Core\STL\Optional.hpp" />
+    <ClInclude Include="Shared\Core\STL\Span.hpp" />
     <ClInclude Include="Shared\Core\STL\String.hpp" />
     <ClInclude Include="Shared\Core\Constants.hpp" />
     <ClInclude Include="Private\pch.hpp" />
     <ClInclude Include="Shared\Core\STL\HashMap.hpp" />
     <ClInclude Include="Shared\Core\STL\HashSet.hpp" />
     <ClInclude Include="Shared\Core\STL\Map.hpp" />
+    <ClInclude Include="Shared\Core\STL\Variant.hpp" />
     <ClInclude Include="Shared\Core\Utility\Helpers.hpp" />
     <ClInclude Include="Shared\Core\STL\Pair.hpp" />
     <ClInclude Include="Shared\Core\STL\Queue.hpp" />

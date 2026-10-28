@@ -4,7 +4,7 @@
 
 namespace NF
 {
-    void VSConsole::Init()
+    void VSConsole::Init([[maybe_unused]] Configuration& config)
     {
         ::NF::Logging::AddSink(UniquePtr<VSConsole>(new VSConsole()));
     }

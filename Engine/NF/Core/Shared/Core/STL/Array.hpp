@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Shared/Core/Types.hpp"
+#include <Core/Types.hpp>
 
 #include <array>
 

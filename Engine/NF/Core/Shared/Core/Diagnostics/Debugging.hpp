@@ -22,6 +22,7 @@ namespace NF::Diagnostics
         const char* expression;
         const char* fileName;
         i32         line;
+        String      message{};
     };
 
     using AssertHandler = bool (*)(const AssertInfo&);

@@ -2,6 +2,7 @@
 
 #include <Core/Module.hpp>
 #include <Core/Types.hpp>
+#include <Core/Configuration.hpp>
 
 #include <Core/STL/Pair.hpp>
 #include <Core/STL/String.hpp>
@@ -11,17 +12,6 @@ namespace NF
     class Window
     {
         NF_MODULE(Window); // this should stay private
-
-        struct Config
-        {
-            void*      handle{}; // e.g. win32 HWND from Editor
-            StringView name{};
-            u32        width{};
-            u32        height{};
-        };
-
-        static
-        void Init(const Config& config);
 
     public: 
 

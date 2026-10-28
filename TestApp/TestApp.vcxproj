@@ -59,14 +59,15 @@
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpplatest</LanguageStandard>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
-      <AdditionalIncludeDirectories>$(SolutionDir)Engine\NF\Application\Shared\;$(SolutionDir)Engine\NF\Core\Shared\;$(SolutionDir)Engine\NF\VSConsole\Shared\;$(SolutionDir)Engine\NF\WinConsole\Shared\;$(SolutionDir)Engine\NF\Window\Shared\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)Engine\NF\Application\Shared\;$(SolutionDir)Engine\NF\Core\Shared\;$(SolutionDir)Engine\NF\VSConsole\Shared\;$(SolutionDir)Engine\NF\WinConsole\Shared\;$(SolutionDir)Engine\NF\Window\Shared\;$(SolutionDir)Engine\NF\Renderer\Shared\;$(SolutionDir)Engine\NF\Configuration\Shared\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <FloatingPointModel>Fast</FloatingPointModel>
+      <UseStandardPreprocessor>true</UseStandardPreprocessor>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>$(SolutionDir)Build\Engine\$(Platform)\$(Configuration)\</AdditionalLibraryDirectories>
-      <AdditionalDependencies>Core.lib;WinConsole.lib;VSConsole.lib;Application.lib;Window.lib;$(CoreLibraryDependencies);%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>Core.lib;WinConsole.lib;VSConsole.lib;Application.lib;Window.lib;Renderer.lib;$(CoreLibraryDependencies);%(AdditionalDependencies)</AdditionalDependencies>
       <EntryPointSymbol>wWinMainCRTStartup</EntryPointSymbol>
     </Link>
     <Manifest>
@@ -84,14 +85,15 @@
       <LanguageStandard>stdcpplatest</LanguageStandard>
       <TreatWarningAsError>true</TreatWarningAsError>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
-      <AdditionalIncludeDirectories>$(SolutionDir)Engine\NF\Application\Shared\;$(SolutionDir)Engine\NF\Core\Shared\;$(SolutionDir)Engine\NF\VSConsole\Shared\;$(SolutionDir)Engine\NF\WinConsole\Shared\;$(SolutionDir)Engine\NF\Window\Shared\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)Engine\NF\Application\Shared\;$(SolutionDir)Engine\NF\Core\Shared\;$(SolutionDir)Engine\NF\VSConsole\Shared\;$(SolutionDir)Engine\NF\WinConsole\Shared\;$(SolutionDir)Engine\NF\Window\Shared\;$(SolutionDir)Engine\NF\Renderer\Shared\;$(SolutionDir)Engine\NF\Configuration\Shared\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <FloatingPointModel>Fast</FloatingPointModel>
+      <UseStandardPreprocessor>true</UseStandardPreprocessor>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>$(SolutionDir)Build\Engine\$(Platform)\$(Configuration)\</AdditionalLibraryDirectories>
-      <AdditionalDependencies>Core.lib;WinConsole.lib;VSConsole.lib;Application.lib;Window.lib;$(CoreLibraryDependencies);%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>Core.lib;WinConsole.lib;VSConsole.lib;Application.lib;Window.lib;Renderer.lib;$(CoreLibraryDependencies);%(AdditionalDependencies)</AdditionalDependencies>
       <EntryPointSymbol>wWinMainCRTStartup</EntryPointSymbol>
     </Link>
     <Manifest>

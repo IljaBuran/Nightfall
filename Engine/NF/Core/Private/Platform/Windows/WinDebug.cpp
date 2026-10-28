@@ -16,7 +16,8 @@ namespace NF::OS::Windows
         if (length == 0)
             return std::format("Unknown error 0x{:08X}", static_cast<u32>(hr));
 
-        String result = ::NF::OS::Windows::WideToUtf8({ buffer, length });
+        String result = WideToUtf8({ buffer, length });
+
         LocalFree(buffer);
 
         while (!result.empty() && (result.back() == '\n' || result.back() == '\r'))

@@ -13,7 +13,7 @@ namespace NF
         WORD AttributesForLevel(::NF::Logging::Level level);
     }
 
-    void WinConsole::Init()
+    void WinConsole::Init([[maybe_unused]] Configuration& config)
     {
         ::NF::Logging::AddSink(UniquePtr<WinConsole>(new WinConsole()));
     }

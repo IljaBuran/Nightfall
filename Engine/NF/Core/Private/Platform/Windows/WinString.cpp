@@ -30,14 +30,14 @@ namespace NF::OS::Windows
         WString result;
         result.resize(required);
 
-        const INT converted{ MultiByteToWideChar(
+        const INT converted = MultiByteToWideChar(
             CP_UTF8,
             0,
             str.data(),
             static_cast<int>(str.size()),
             result.data(),
             required
-        ) };
+        );
 
         if (converted == 0)
         {
@@ -73,7 +73,7 @@ namespace NF::OS::Windows
         String result;
         result.resize(required);
 
-        const INT converted{ WideCharToMultiByte(
+        const INT converted = WideCharToMultiByte(
             CP_UTF8,
             0,
             str.data(),
@@ -82,7 +82,7 @@ namespace NF::OS::Windows
             required,
             nullptr,
             nullptr
-        ) };
+        );
 
         if (converted == 0)
         {

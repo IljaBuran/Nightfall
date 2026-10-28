@@ -23,13 +23,7 @@ namespace NF
         LRESULT CALLBACK WindowProc(HWND hWnd, u32 uMsg, WPARAM wParam, LPARAM lParam) noexcept;
     }
 
-    void Window::Init()
-    {
-        // Window needs to be initialized with Init(const Config&) method;
-        NF_ASSERT(0);
-    }
-
-    void Window::Init(const Config& config)
+    void Window::Init(Configuration& config)
     {
         WNDCLASSEXW wc
         {
@@ -59,6 +53,9 @@ namespace NF
 
             width  = static_cast<i32>(0.75f * monitorWidth);
             height = static_cast<i32>(0.75f * monitorHeight);
+
+            config.width = width;
+            config.height = height;
         }
         else
         {
@@ -80,7 +77,7 @@ namespace NF
         const i32 windowH{ clientRect.bottom - clientRect.top };
 
         // todo: parent window for editor!!!
-        if (!config.handle)
+        if (!config.windowHandle)
         {
             HMONITOR monitor{ MonitorFromPoint({ 0, 0 }, MONITOR_DEFAULTTOPRIMARY) };
             MONITORINFO info{ .cbSize = sizeof(MONITORINFO) };
@@ -110,6 +107,7 @@ namespace NF
 
         NF_ASSERT(nativeWindowHandle);
 
+        config.windowHandle = nativeWindowHandle;
         //NF_LOG_INFO("Win32 window initialized successfully");
 
         ShowWindow(nativeWindowHandle, SW_NORMAL);

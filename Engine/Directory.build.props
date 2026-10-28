@@ -37,6 +37,9 @@
       <!-- Force UTF8 -->
       <AdditionalOptions>/utf-8 %(AdditionalOptions)</AdditionalOptions>
 
+      <!-- This needs to be here for variadic define expansion -->
+      <UseStandardPreprocessor>true</UseStandardPreprocessor>
+
       <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>NF_USE_STL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>

@@ -7,14 +7,15 @@
       <Platform Project="x64" />
     </Project>
   </Folder>
-  <Folder Name="/Engine/">
-    <File Path="Engine/NF/NightfallConfig.hpp" />
-  </Folder>
+  <Folder Name="/Engine/" />
   <Folder Name="/Engine/NF/">
     <Project Path="Engine/NF/Application/Application.vcxproj" Id="991ccdcf-dfc0-44d6-8546-a1f6528cad04">
       <BuildDependency Project="Engine/NF/Core/Core.vcxproj" />
     </Project>
     <Project Path="Engine/NF/Core/Core.vcxproj" Id="607c5b49-f6a5-4990-8940-eb59572ca084" />
+    <Project Path="Engine/NF/Renderer/Renderer.vcxproj" Id="89fabdd4-647a-4eef-8a9f-502d4d2dca97">
+      <BuildDependency Project="Engine/NF/Core/Core.vcxproj" />
+    </Project>
     <Project Path="Engine/NF/VSConsole/VSConsole.vcxproj" Id="55e0033f-f46a-439a-997b-3739b2ba13d5" />
     <Project Path="Engine/NF/WinConsole/WinConsole.vcxproj" Id="03488e80-1a16-4610-b469-665ec6843730" />
     <Project Path="Engine/NF/Window/Window.vcxproj" Id="374b9b29-67f5-4d08-8768-e40e770d5a10">
@@ -24,6 +25,7 @@
   <Project Path="TestApp/TestApp.vcxproj" Id="d9310147-0438-4e48-b76e-b79675e94ab3">
     <BuildDependency Project="Engine/NF/Application/Application.vcxproj" />
     <BuildDependency Project="Engine/NF/Core/Core.vcxproj" />
+    <BuildDependency Project="Engine/NF/Renderer/Renderer.vcxproj" />
     <BuildDependency Project="Engine/NF/VSConsole/VSConsole.vcxproj" />
     <BuildDependency Project="Engine/NF/WinConsole/WinConsole.vcxproj" />
     <BuildDependency Project="Engine/NF/Window/Window.vcxproj" />
