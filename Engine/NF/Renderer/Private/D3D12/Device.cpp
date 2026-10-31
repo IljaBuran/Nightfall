@@ -5,7 +5,7 @@
 
 namespace NF::RendererApi::D3D12
 {
-    void Device::Create(IDXGIFactoryVer* const factory)
+    void Device::Create(IDXGIFactoryVer* factory)
     {
     #if defined(D3D_DEBUG)
 
@@ -18,13 +18,29 @@ namespace NF::RendererApi::D3D12
     #endif
         
         HRESULT hRes{};
-        for (u32 i{ 0 }; WIN_OK(factory->EnumAdapterByGpuPreference(i, DXGI_GPU_PREFERENCE_HIGH_PERFORMANCE, IID_PPV_ARGS(&m_dxgiAdapter))); i++)
+        for (u32 i{ 0 }; WIN_OK(factory->EnumAdapterByGpuPreference(i, DXGI_GPU_PREFERENCE_HIGH_PERFORMANCE, IID_PPV_ARGS(&m_dxgiAdapter))); ++i)
         {
             hRes = D3D12CreateDevice(m_dxgiAdapter.Get(), D3D12_REQUIRED_FEATURE_LEVEL, IID_PPV_ARGS(&m_d3d12Device));
 
             if (WIN_OK(hRes))
             {
                 m_gpuDesc = GetGpuInfo(m_dxgiAdapter.Get());
+
+                D3D12_FEATURE_DATA_SHADER_MODEL sm{ .HighestShaderModel{ D3D12_REQUIRED_SHADER_MODEL } };
+                hRes = (m_d3d12Device->CheckFeatureSupport1(
+                    D3D12_FEATURE_SHADER_MODEL,
+                    &sm, 
+                    sizeof(D3D12_FEATURE_DATA_SHADER_MODEL), 
+                    D3D12_SDK_VERSION
+                ));
+
+                if (WIN_FAIL(hRes) || sm.HighestShaderModel < D3D12_REQUIRED_SHADER_MODEL)
+                {
+                    NF_LOG_WARNING("Graphics Card: {} {:.0f}GB doesn't meet requirements, must support Shader Model >= 6.6", m_gpuDesc.name, m_gpuDesc.dedicatedMemoryInGBs);
+                    m_d3d12Device.Reset();
+                    continue;
+                }
+                
                 m_displaysDescs = GetAllConnectedDisplayDescriptions(m_dxgiAdapter.Get());
 
                 NF_LOG_INFO("Graphics Card: {} {:.0f}GB", m_gpuDesc.name, m_gpuDesc.dedicatedMemoryInGBs);
@@ -36,11 +52,23 @@ namespace NF::RendererApi::D3D12
                         d.maxRefreshRate);
 
                 NF_LOG_INFO("[DX12] Device created");
+
+            #if defined(D3D_DEBUG)
+                m_infoQueue.Initialize(m_d3d12Device.Get());
+            #endif
+
                 return;
+            }
+            else
+            {
+                m_d3d12Device.Reset();
+                m_dxgiAdapter.Reset();
             }
         }
 
-        WIN_CHECK(hRes);
+        m_dxgiAdapter.Reset();
+
+        NF_ASSERT(false, "No GPU found that supports Feature Level 12_2 and Shader Model 6.6");
     }
 
     const GpuDesc& Device::GetGpuDescription() const

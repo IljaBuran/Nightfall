@@ -6,19 +6,23 @@ namespace NF
 {
     namespace
     {
-        ComPtr<IDxcUtils>     dxcUtils;
-        ComPtr<IDxcCompiler3> dxcCompiler;
+        ComPtr<IDxcUtils>          pDxcUtils;
+        ComPtr<IDxcCompiler3>      pDxcCompiler;
+        ComPtr<IDxcIncludeHandler> pDxcIncludeHandler;
     }
 
     ShaderCompiler::ShaderCompiler()
     {
         WIN_CHECK(DxcCreateInstance(
             CLSID_DxcUtils,
-            IID_PPV_ARGS(&dxcUtils)
+            IID_PPV_ARGS(&pDxcUtils)
         ));
+
+        pDxcUtils->CreateDefaultIncludeHandler(&pDxcIncludeHandler);
+
         WIN_CHECK(DxcCreateInstance(
             CLSID_DxcCompiler,
-            IID_PPV_ARGS(&dxcCompiler)
+            IID_PPV_ARGS(&pDxcCompiler)
         ));
     }
 
@@ -32,7 +36,7 @@ namespace NF
 
         WString wPath = OS::Windows::Utf8ToWide(path);
 
-        if (WIN_FAIL(dxcUtils->LoadFile(wPath.c_str(), &codePage, source.GetAddressOf())))
+        if (WIN_FAIL(pDxcUtils->LoadFile(wPath.c_str(), &codePage, source.GetAddressOf())))
         {
             NF_LOG_WARNING("Failed to load shader file. Path: \"{}\"", path);
             return {};
@@ -57,10 +61,16 @@ namespace NF
 
             Vector<const WCHAR*> args
             {
-                L"-WX",
+            #if defined(D3D_DEBUG)
                 L"-Zi",
-                L"-Qembed_debug"
+                L"-Qembed_debug",
+                L"-Od"
+            #else
+                L"-WX",
+                L"-O3"
+            #endif
             };
+
 
             Vector<DxcDefine> defines
             {
@@ -68,7 +78,7 @@ namespace NF
 
             ComPtr<IDxcCompilerArgs> dxcArgs;
 
-            WIN_CHECK(dxcUtils->BuildArguments(
+            WIN_CHECK(pDxcUtils->BuildArguments(
                 wPath.c_str(),
                 OS::Windows::Utf8ToWide(GetEntryPoint(curr)).c_str(),
                 OS::Windows::Utf8ToWide(GetProfile(curr)).c_str(),
@@ -83,11 +93,11 @@ namespace NF
 
             ComPtr<IDxcResult> dxcRes;
 
-            WIN_CHECK(dxcCompiler->Compile(
+            WIN_CHECK(pDxcCompiler->Compile(
                 &sourceBuffer,
                 dxcArgs->GetArguments(),
                 dxcArgs->GetCount(),
-                nullptr,
+                pDxcIncludeHandler.Get(),
                 IID_PPV_ARGS(dxcRes.GetAddressOf())
             ));
 
@@ -102,7 +112,7 @@ namespace NF
             HRESULT status{};
             WIN_CHECK(dxcRes->GetStatus(&status));
 
-            const bool hasText = dxcDiagnostics && dxcDiagnostics->GetStringLength() != 0;
+            const bool hasText{ dxcDiagnostics && dxcDiagnostics->GetStringLength() != 0 };
 
             if (FAILED(status))
             {

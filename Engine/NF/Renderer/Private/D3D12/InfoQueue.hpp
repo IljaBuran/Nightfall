@@ -5,7 +5,10 @@
 #include <Core/Diagnostics/Assert.hpp>
 #include <Core/Utility/Helpers.hpp>
 
+#pragma warning(push)
+#pragma warning(disable: 6262)
 #include <magic_enum/magic_enum.hpp>
+#pragma warning(pop)
 
 // overriding search range
 template<>
@@ -31,7 +34,6 @@ namespace NF::RendererApi::D3D12
 
         void Initialize(ID3D12DeviceVer* const device);
         void Destroy();
-
 
     private:
 

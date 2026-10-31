@@ -3,19 +3,13 @@
 #include "Renderer/Renderer.hpp"
 #include "Renderer/Settings.hpp"
 
-#include "Private/D3D12/Factory.hpp"
-#include "Private/D3D12/Device.hpp"
-#include "Private/D3D12/InfoQueue.hpp"
-#include "Private/D3D12/CommandQueue.hpp"
-#include "Private/D3D12/CommandList.hpp"
-#include "Private/D3D12/DescriptorUtil.hpp"
-#include "Private/D3D12/Swapchain.hpp"
-#include "Private/D3D12/Fence.hpp"
-#include "Private/D3D12/FrameResource.hpp"
-
-#include <Core/STL/Array.hpp>
-
 #pragma comment(lib, "d3d12.lib")
+
+extern "C"
+{
+    __declspec(dllexport) extern const UINT D3D12SDKVersion = D3D12_SDK_VERSION;
+    __declspec(dllexport) extern const char* const D3D12SDKPath = ".\\D3D12\\";
+}
 
 namespace NF
 {
@@ -26,7 +20,6 @@ namespace NF
         RendererSettings settings;
 
         D3D12::Device device;
-        D3D12::InfoQueue infoQueue;
         D3D12::CommandQueue commandQueue;
         D3D12::CommandList commandList;
         D3D12::CbvSrvUavHeap cbvSrvUavHeap;
@@ -63,10 +56,7 @@ namespace NF
         ::NF::RendererApi::D3D12::Factory factory;
 
         device.Create(factory);
-    #ifdef D3D_DEBUG
-        infoQueue.Initialize(device);
-    #endif
-
+    
         commandQueue.Create(device, D3D12_COMMAND_LIST_TYPE_DIRECT);
 
         cbvSrvUavHeap.Create(device, config.cbvSrvUavCapacity);
@@ -163,8 +153,6 @@ namespace NF
     void Renderer::Shutdown()
     {
         FlushEverything();
-
-        infoQueue.Destroy();
     }
 
     namespace

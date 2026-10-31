@@ -2,6 +2,8 @@
 
 #include "Private/D3D12/D3D12Include.hpp"
 
+#include "Private/D3D12/InfoQueue.hpp"
+
 #include "Renderer/Utility.hpp"
 
 #include <Core/Diagnostics/Assert.hpp>
@@ -76,5 +78,7 @@ namespace NF::RendererApi::D3D12
 
         GpuDesc             m_gpuDesc;
         Vector<DisplayDesc> m_displaysDescs;
+
+        InfoQueue m_infoQueue;
     };
 }

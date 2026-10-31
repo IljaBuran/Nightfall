@@ -64,19 +64,17 @@ namespace NF
     {
         switch (type)
         {
-            case ShaderType::VERTEX:        return "vs_6_8";
-            case ShaderType::HULL:          return "hs_6_8";
-            case ShaderType::DOMAIN_:       return "ds_6_8";
-            case ShaderType::GEOMETRY:      return "gs_6_8";
-            case ShaderType::PIXEL:         return "ps_6_8";
-            case ShaderType::COMPUTE:       return "cs_6_8";
-            case ShaderType::AMPLIFICATION: return "as_6_8";
-            case ShaderType::MESH:          return "ms_6_8";
+            case ShaderType::VERTEX:        return "vs_6_6";
+            case ShaderType::HULL:          return "hs_6_6";
+            case ShaderType::DOMAIN_:       return "ds_6_6";
+            case ShaderType::GEOMETRY:      return "gs_6_6";
+            case ShaderType::PIXEL:         return "ps_6_6";
+            case ShaderType::COMPUTE:       return "cs_6_6";
+            case ShaderType::AMPLIFICATION: return "as_6_6";
+            case ShaderType::MESH:          return "ms_6_6";
         }
         std::unreachable();
     }
-
-
 
     struct Shader
     {

@@ -6,7 +6,6 @@
 #include <type_traits>
 #include <utility>
 
-
 #endif
 
 namespace NF
@@ -17,13 +16,15 @@ namespace NF
     using Optional = std::optional<T>;
 
     template<class T>
-    constexpr Optional<std::decay_t<T>> MakeOptional(T&& value)
+    constexpr 
+    Optional<std::decay_t<T>> MakeOptional(T&& value)
     {
         return std::make_optional(std::forward<T>(value));
     }
 
     template<class T, class... Args>
-    constexpr Optional<T> MakeOptional(Args&&... args)
+    constexpr 
+    Optional<T> MakeOptional(Args&&... args)
     {
         return std::make_optional<T>(std::forward<Args>(args)...);
     }

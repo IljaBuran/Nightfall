@@ -2,8 +2,6 @@
 
 #include "Private/D3D12/InfoQueue.hpp"
 
-#include <Core/STL/Format.hpp>
-
 namespace NF::RendererApi::D3D12
 {
     void InfoQueue::Initialize(ID3D12DeviceVer* const device)
@@ -18,7 +16,31 @@ namespace NF::RendererApi::D3D12
 
         NF_ASSERT(m_infoQueueCallbackCookie);
 
-        NF_LOG_INFO("[DX12] Debug InfoQueue created and message callback registered");
+        m_infoQueue->SetMuteDebugOutput(TRUE);
+
+        //NF_LOG_INFO("[DX12] Debug InfoQueue created and message callback registered");
+
+        Vector<byte> buffer(500);
+
+        // retrieve all the messages received before registering infoqueue
+        UINT64 count{ m_infoQueue->GetNumStoredMessages() };
+        for (UINT64 i{ 0 }; i < count; ++i)
+        {
+            SIZE_T size{ 0 };
+            m_infoQueue->GetMessage(i, nullptr, &size);
+
+            if (buffer.capacity() < size)
+            {
+                buffer.resize(size);
+            }
+
+            D3D12_MESSAGE* pMsg{ reinterpret_cast<D3D12_MESSAGE*>(buffer.data()) };
+            m_infoQueue->GetMessage(i, pMsg, &size);
+
+            CallbackFunction(pMsg->Category, pMsg->Severity, pMsg->ID, pMsg->pDescription, nullptr);
+        }
+
+        buffer.clear();
     }
 
     void InfoQueue::Destroy()

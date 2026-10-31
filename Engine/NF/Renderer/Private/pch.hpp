@@ -23,8 +23,17 @@
     #include <Core/Platform/Windows/WinUtil.hpp>
 
     #include <Private/D3D12/D3D12Include.hpp>
+    #include <DirectXShaderCompiler/dxcapi.h>
 
-    #include <DirectXShaderCompiler/inc/dxcapi.h>
+    #include "Private/D3D12/Factory.hpp"
+    #include "Private/D3D12/Device.hpp"
+    #include "Private/D3D12/InfoQueue.hpp"
+    #include "Private/D3D12/CommandQueue.hpp"
+    #include "Private/D3D12/CommandList.hpp"
+    #include "Private/D3D12/DescriptorUtil.hpp"
+    #include "Private/D3D12/Swapchain.hpp"
+    #include "Private/D3D12/Fence.hpp"
+    #include "Private/D3D12/FrameResource.hpp"
 
 #endif
 
@@ -32,6 +41,7 @@
 #include <Core/Logging/Logging.hpp>
 
 #include <Core/STL/Array.hpp>
+#include <Core/STL/Format.hpp>
 #include <Core/STL/Optional.hpp>
 #include <Core/STL/String.hpp>
 #include <Core/STL/Vector.hpp>

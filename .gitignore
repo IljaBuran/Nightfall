@@ -4,6 +4,24 @@
 *.user
 .vs/
 
+*.pdb
+
+# Zed specific
+**/.zed
+
 # Nightfall specific
 Build
 Editor/obj
+
+# DirectX non shareable
+ThirdParty/Engine/DirectXAgilitySDK/Bin/ARM64/D3D12StateObjectCompiler.dll
+ThirdParty/Engine/DirectXAgilitySDK/Bin/ARM64/D3D12StateObjectCompiler.exe
+ThirdParty/Engine/DirectXAgilitySDK/Bin/ARM64/d3dconfig.exe
+ThirdParty/Engine/DirectXAgilitySDK/Bin/x64/D3D12StateObjectCompiler.dll
+ThirdParty/Engine/DirectXAgilitySDK/Bin/x64/D3D12StateObjectCompiler.exe
+ThirdParty/Engine/DirectXAgilitySDK/Bin/x64/d3dconfig.exe
+
+ThirdParty/Engine/DirectXShaderCompiler/Bin/ARM64/dxc.exe
+ThirdParty/Engine/DirectXShaderCompiler/Bin/ARM64/dxv.exe
+ThirdParty/Engine/DirectXShaderCompiler/Bin/x64/dxc.exe
+ThirdParty/Engine/DirectXShaderCompiler/Bin/x64/dxv.exe
